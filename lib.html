@@ -1,0 +1,313 @@
+<html>
+<style>
+    h1 {
+        text-align: center;
+        display: relative;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 45px;
+        color: rgb(255, 0, 128);
+        border: none;
+        margin: none;
+    }
+    
+    body {
+        overflow-x: hidden;
+    }
+    
+    input[type=text] {
+        width: 60%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        position: relative;
+    }
+    
+    .button1:hover {
+        background-color: #00b80f;
+    }
+    
+    .en,
+    .en1 {
+        font-size: 25px;
+        font-family: 'Times New Roman', Times, serif;
+        color: blue;
+    }
+    
+    .button1,
+    .ad {
+        width: 10%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        margin: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        position: absolute;
+    }
+    
+    .ad {
+        margin: 0px 0px 20px 0px;
+    }
+    
+    .dropbtn:hover,
+    .dropbtn:focus,
+    .dropdown-content button:hover,
+    .dropdown-content button:focus {
+        background-color: #6b68ff;
+    }
+    
+    .dropbtn {
+        width: 8%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        background-color: #0004ff;
+        color: white;
+        padding: 12px 12px;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+        margin: none;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 8%;
+        left: 0px;
+        background-color: #5d5bff;
+        width: 10%;
+        overflow: auto;
+        z-index: 1;
+    }
+    
+    .dropdown-content button {
+        background-color: #0400ff;
+        padding: 12px 16px;
+        color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        display: block;
+    }
+    
+    .show {
+        display: block;
+    }
+    
+    .search {
+        position: absolute;
+        width: 100%;
+        left: 240px;
+        float: left
+    }
+    
+    #dis {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .indis {
+        display: block;
+        position: relative;
+        margin: 40px 20px;
+        padding: 20px 20px;
+        border: 1px solid grey;
+        border-radius: 10px;
+        text-align: center;
+        width: 70%
+    }
+    
+    .indis:hover,
+    .indis:focus,
+    .indis:active {
+        transform: scale(1.1);
+        border-color: rgb(255, 238, 0);
+    }
+    
+    img {
+        border-radius: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .spec {
+        margin-top: 10%;
+        margin-bottom: 2%;
+        margin-left: 17%;
+    }
+</style>
+
+<body>
+    <button onclick="myFunction()" class="dropbtn">Menu</button>
+    <div id='div' class="dropdown-content">
+        <button type='button' onclick="addBook()">Add New Book Details</button>
+
+        <button type='button' onclick="deleteBook()">Delete Book Details</button>
+    </div>
+    <h1>Library</h1>
+    <div class='search'>
+        <input type="text" id="fname" name="name" placeholder="Enter Book name...">
+        <button type='button' class='button1' onclick="search()">Search</button>
+    </div>
+    <div class='temp'></div>
+
+    <div id='0'></div>
+    <div id='2' class='spec'></div>
+    <div id='3'></div>
+    <div id='1'></div>
+    <script>
+        function Book(BookName, Author, Img) {
+            this.bookname = BookName;
+            this.author = Author;
+            this.img = Img
+        }
+        Book.prototype.getDetails = function() {
+            return '<div class="indis"><img src=' + this.img + ' alt="Novel" width="150" height="200"><br><label><b>' + this.bookname + "</b></label><br>Author Name :" + this.author + "</div>";
+        }
+        Object.defineProperty(Book, 'bookname', {
+            writable: false
+        });
+        Books = [new Book('Merchant of Vennis', 'ShakeSpeare', "https://images-na.ssl-images-amazon.com/images/I/519KfsM6bRL._SX322_BO1,204,203,200_.jpg"),
+            new Book('He-man', 'Mark Tylor', "https://m.media-amazon.com/images/M/MV5BODgyYzRhNzAtMTJlNC00OTM0LWI3M2ItNzZjYzYxZmJiOWIyL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNDUxNjc5NjY@._V1_UY268_CR0,0,182,268_AL_.jpg"),
+            new Book('Marvel', 'Stan lee', "https://upload.wikimedia.org/wikipedia/en/thumb/0/08/Secretwars1.png/220px-Secretwars1.png"),
+            new Book('Naruto', 'Masashi Kishimoto', "https://img.thriftbooks.com/api/images/l/5733979f44f82d7347b8d7718f996747462fe029.jpg"),
+            new Book('God of war', 'Cory Barlog', "https://images-na.ssl-images-amazon.com/images/I/61sRqH2-waL.jpg"),
+            new Book('Spongebob', 'Stephen Hillenburg', "https://images-na.ssl-images-amazon.com/images/I/71GA+b7Nz7L.jpg"),
+            new Book('Big hero 6', 'Dan Garson', "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1426803822l/23448360.jpg"),
+            new Book('Batman Triology', 'Chris Nolan', "https://static.tvtropes.org/pmwiki/pub/images/rsz_tdkrposter29_2001.jpg"),
+            new Book('Jackie Chan', 'Eliza Willard', "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1309213226l/510746.jpg"),
+            new Book('Tekken', 'Scott', "https://images-eu.ssl-images-amazon.com/images/I/91silieOh1L.__BG0,0,0,0_FMpng_AC_UL320_SR210,320_.jpg")
+        ];
+        displayAll();
+
+        function displayAll() {
+            let con = "<div id='dis'>";
+            Books.sort((Books1, Books2) => (Books1.bookname > Books2.bookname) ? 1 : (Books1.bookname < Books2.bookname) ? -1 : 0);
+            document.getElementById('0').innerHTML = '';
+            for (let i = 0; i < Books.length; i++) {
+                con += "<span id='span'>" + Books[i].getDetails() + "</span>";
+            }
+            con += "</div>"
+            document.getElementById('1').innerHTML = con
+        }
+        document.getElementById("dis").addEventListener('click', (e) => {
+            let list = e.target;
+            if (e.target.nodeName === 'IMG') {
+                list = list.parentNode;
+            }
+            for (let i = 0; i < list.children.length; i++) {
+                if (list.children[i].nodeName === 'LABEL') {
+                    search(list.children[i].textContent);
+                }
+            }
+        });
+
+
+
+        function addBook() {
+            let div = '<b><label class="en">Enter details Here</label><br><br><input type="text" id="b1" placeholder="Enter Book name"> <br><br><input type="text" id="b2" placeholder="Enter Author name"> <br><br><input type="text" id="b3" placeholder ="Paste Image Link">  <br><br>';
+            document.getElementById('2').innerHTML = div + "<button type='button' class='ad' onclick='add()'>Add</button>";
+        }
+
+        function add() {
+            let name1 = document.getElementById('b1').value;
+            let author1 = document.getElementById('b2').value;
+            let link = document.getElementById('b3').value;
+            if (name1 != '' && author1 != '') {
+                Books.unshift(new Book(name1, author1, link));
+                document.getElementById('2').innerHTML = '<label class="en1">New Book Added Successfully</label>';
+                setTimeout(() => {
+                    document.getElementById('2').innerHTML = '';
+                }, 3000);
+            }
+            displayAll();
+        }
+
+        function myFunction() {
+            document.getElementById("div").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+
+        function search(name) {
+            if (name === undefined)
+                name = document.getElementById('fname').value;
+            if (name === '')
+                return;
+            let c = 0;
+            for (let i = 0; i < Books.length; i++) {
+                if (Books[i].bookname === name) {
+                    document.getElementById('2').innerHTML = Books[i].getDetails();
+                    c++;
+                }
+            }
+            if (c == 0) {
+                document.getElementById('2').innerHTML = name + " Book Not Found";
+            }
+        }
+
+        function Update() {
+            document.getElementById('0').innerHTML = '';
+            document.getElementById('1').innerHTML = '';
+            document.getElementById('2').innerHTML = '';
+            document.getElementById('3').innerHTML = 'Enter Book name :<input type="text" id="up">  <button type="button" onclick="search2()">Search</button>';
+        }
+
+        function search2() {
+            let name = document.getElementById('up').value;
+            let c = 0,
+                val;
+            for (let i = 0; i < Books.length; i++) {
+                if (!Books[i].bookname.localeCompare(name)) {
+                    val = '<b>Edit details Here<br><br>Book name :<input type="text" id="up1" value =' + Books[i].bookname + ' readonly> <br><br>Author :<input type="text" id="up2" value = ' + Books[i].author + '> <br><br>Price :<input type="text" id="up3" value = ' + Books[i].price + '>  <br><br>';
+                    document.getElementById('3').innerHTML = val + '<button type="button" onclick="update()"> update</button>';
+                    c++;
+                }
+            }
+            if (c == 0) {
+                document.getElementById('3').innerHTML = name + " Book Not Found";
+            }
+        }
+
+        function update() {
+            let name1 = document.getElementById('up1').value;
+            let author1 = document.getElementById('up2').value;
+            let price1 = document.getElementById('up3').value;
+            if (author1 != '') {
+                for (let i = 0; i < Books.length; i++) {
+                    if (!Books[i].bookname.localeCompare(name1)) {
+                        Books[i].author = author1;
+                        console.log(author1);
+                        Books[i].price = price1;
+                    }
+                    document.getElementById('3').innerHTML = "Updated sucessfully";
+                }
+            }
+        }
+
+        function deleteBook() {
+
+        }
+    </script>
+</body>
+
+</html>
