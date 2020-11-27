@@ -1,0 +1,51 @@
+<html>
+
+<body>
+    <h1>Quiz Challenge</h1>
+    <div id='1'></div>
+    <button type='button' onclick="submit()">submit</button>
+    <div id='2'></div>
+    <script>
+        function Question(theQuestion, theChoices, theCorrectAnswer) {
+            this.question = theQuestion;
+            this.choices = theChoices;
+            this.correctAnswer = theCorrectAnswer;
+        }
+        Question.prototype.getCorrectAnswer = function() {
+            return this.correctAnswer;
+        };
+        questions = [new Question("1.Cairo is the capital of which country?", ['Georgia', 'Italy', 'Egypt', 'Iceland'], 'Egypt'),
+            new Question("2.Canberra is the capital of which country?", ['Austria', 'Australia', 'Angola', 'Andaman'], 'Australia'),
+            new Question("3.Paris is the capital of which country?", ['France', 'England', 'Greenland', 'Russia'], 'France')
+        ];
+        var display1 = "";
+        for (let i = 0; i < questions.length; i++) {
+            display1 = display1 + '<br>' + questions[i].question;
+            console.log(questions[0].getCorrectAnswer);
+            let j = 0;
+            questions[i].choices.forEach(function(element) {
+                display1 = display1 + "<br>" + "<input type=radio name=ques" + (i + 1) + " id=" + element + " value=" + element + ">" + element;
+                j++;
+            });
+        }
+        document.getElementById('1').innerHTML = display1;
+
+        function submit() {
+            let ans = "<br>";
+            let count = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (document.getElementById(questions[i].getCorrectAnswer()).checked) {
+                    ans = ans + (i + 1) + '.Correct Answer';
+                    count++;
+                } else {
+                    ans = ans + (i + 1) + '.Wrong Answer and Correct Ans is ' + questions[i].getCorrectAnswer();
+                }
+                ans += '<br>';
+            }
+            ans = 'Your Score is ' + count + "/3" + ans
+            document.getElementById('2').innerHTML = ans;
+        }
+    </script>
+</body>
+
+</html>

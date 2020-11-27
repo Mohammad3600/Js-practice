@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body style="text-align: center;">
+    <h1> Cricket Stats</h1>
+    <button type="button" onclick="filter1()">Most Runs</button><br><br><br><br>
+    <button type="button" onclick="filter2()">Most Wickets</button><br><br><br><br>
+    <button type="button" onclick="filter3()">Best Average</button><br><br><br><br>
+    <button type="button" onclick="filter4()">Most Sixes</button><br><br>
+    <div id='4'></div><br><br>
+    <script>
+        function Player(Name, Age, Runs, Wickets, Avg, Sixes) {
+            this.name = Name;
+            this.age = Age;
+            this.runs = Runs;
+            this.wickets = Wickets;
+            this.avg = Avg;
+            this.sixes = Sixes;
+        }
+        let players = [new Player("Kohli", 31, 5878, 4, 38.17, 201), new Player("Rohit", 33, 5230, 15, 31.32, 213),
+            new Player("Dhoni", 39, 4632, 0, 40.99, 216), new Player("Devilliers", 36, 4849, 0, 40.41, 235),
+            new Player("Gayle", 41, 4772, 18, 41.14, 384)
+        ];
+
+        function filter1() {
+            players.sort((player1, player2) => player1.runs < player2.runs ? 1 : player1.runs > player2.runs ? -1 : 0);
+            document.getElementById('4').innerHTML = '<b>Most Runs';
+            display();
+        }
+
+        function filter2() {
+            players.sort((player1, player2) => player1.wickets < player2.wickets ? 1 : player1.wickets > player2.wickets ? -1 : 0);
+            document.getElementById('4').innerHTML = '<b>Most Wickets';
+            display();
+        }
+
+        function filter3() {
+            players.sort((player1, player2) => player1.avg < player2.avg ? 1 : player1.avg > player2.avg ? -1 : 0);
+            document.getElementById('4').innerHTML = '<b>Best Average';
+            display();
+        }
+
+        function filter4() {
+            players.sort((player1, player2) => player1.sixes < player2.sixes ? 1 : player1.sixes > player2.sixes ? -1 : 0);
+            document.getElementById('4').innerHTML = '<b>Most Sixes';
+            display();
+        }
+
+        function display() {
+            let div = "<table><tr><th>Name</th><th>Age</th><th>Runs</th><th>Wickets</th><th>Average</th><th>Sixes</th></tr>";
+            for (let i = 0; i < players.length; i++) {
+                div = div + "<tr><td>" + players[i].name + "</td>" + "<td>" + players[i].age + "</td>" + "<td>" + players[i].runs +
+                    "</td>" + "<td>" + players[i].wickets + "</td>" + "<td>" + players[i].avg + "</td>" + "<td>" + players[i].sixes + "</td></tr>";
+            }
+            div += "</table>"
+            document.getElementById('4').innerHTML += div;
+        }
+    </script>
+</body>
+
+</html>

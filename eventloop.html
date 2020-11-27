@@ -1,0 +1,25 @@
+<html>
+
+<body>
+    <button id='btn1'> Click1</button>
+    <button id='btn2'> Click2</button>
+    <script>
+        let btn1 = document.getElementById('btn1');
+        btn1.addEventListener('click', function() {
+            setTimeout(function() {
+                console.log('first');
+                setTimeout(() => console.log("first Hiii"), 2000)
+            }, 2000);
+        });
+        console.log("Hi!");
+        let btn2 = document.getElementById('btn2');
+        btn2.addEventListener('click', function() {
+            setTimeout(function() {
+                console.log('second');
+                setTimeout(() => console.log(" second Hiii "), 0)
+            }, 0);
+        });
+    </script>
+</body>
+
+</html>

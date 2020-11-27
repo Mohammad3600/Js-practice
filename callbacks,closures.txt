@@ -1,0 +1,128 @@
+
+//snippet 1 callbacks
+let allUserData = [];
+function logStuff (userData) {
+    if ( typeof userData === "string")
+    {
+        console.log(userData);
+    }
+    else if ( typeof userData === "object")
+    {
+        for (let item in userData) {
+            console.log(item + ": " + userData[item]);
+        }
+
+    }
+
+}
+
+function getInput (options, callback) {
+    allUserData.push (options);
+    callback (options);
+
+}
+
+getInput ({name:"Rich", speciality:"JavaScript"}, logStuff);
+
+// snippet 2 closures
+function showName (firstName, lastName) {
+var nameIntro = "Your name is ";
+function makeFullName () {     
+return nameIntro + firstName + " " + lastName;    
+}
+return makeFullName ();
+}
+showName ("Michael", "Jackson");
+
+
+//closure can be access vaiables after return..
+
+function showName (firstName, lastName) {
+var nameIntro = "Your name is ";
+function makeFullName () {     
+return nameIntro + firstName + " " + lastName;    
+}
+return makeFullName;
+}
+let show =showName ("Michael", "Jackson");
+show();
+
+// closures store references
+
+function celebrityID () {
+    var celebrityID = 999;
+    return {
+        getID: function ()  {
+          return celebrityID;
+        },
+        setID: function (theNewID)  {
+            celebrityID = theNewID;
+        }
+    }
+}
+var mjID = celebrityID (); 
+mjID.getID(); // 999
+mjID.setID(567); 
+mjID.getID();//567
+
+
+//clousers leads to bugs
+
+function celebrityIDCreator (theCelebrities) {
+    var i;
+    var uniqueID = 100;
+    for (i = 0; i < theCelebrities.length; i++) {
+      theCelebrities[i]["id"] = function ()  {
+        return uniqueID + i;
+      }
+    }
+    
+    return theCelebrities;
+}
+
+var actionCelebs = [{name:"Robert", id:0}, {name:"Cruise", id:0}, {name:"Rock", id:0}];
+var createIdForActionCelebs = celebrityIDCreator (actionCelebs);
+var RobertID = createIdForActionCelebs [0];
+console.log(RobertID.id()); // 103 instead of 100
+
+//To fix we will use createIdForActionCelebs
+
+function celebrityIDCreator (theCelebrities) {
+    var i;
+    var uniqueID = 100;
+    for (i = 0; i < theCelebrities.length; i++) {
+      theCelebrities[i]["id"] = (function ()  {
+        return uniqueID + i;
+      })();
+    }
+    
+    return theCelebrities;
+}
+
+var actionCelebs = [{name:"Robert", id:0}, {name:"Cruise", id:0}, {name:"Rock", id:0}];
+var createIdForActionCelebs = celebrityIDCreator (actionCelebs);
+var RobertID = createIdForActionCelebs [0];
+console.log(RobertID.id);
+
+
+//setTimeout() and setInterval()
+function hello()
+{
+    console.log("Hello world");
+}
+setTimeout(hello,3000);
+console.log("Welcome"); //Welcome and then Hello world
+
+//var vs let in setTimeout
+for(var i=1; i<6; i++){
+setTimeout(function(){
+console.log(i);
+},1000)
+}
+//output is 5 times 6
+for(let i=1; i<6; i++){
+setTimeout(function(){
+console.log(i);
+},1000)
+}
+//output is 1,2,3,4,5

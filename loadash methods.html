@@ -1,0 +1,257 @@
+<html>
+
+<body>
+    <script>
+        let aj = new Array(10, 20, 30, 40, 50);
+        //splitting arrays into groups of arryas
+        function chunk(arr, size) {
+            let a = [],
+                len = arr.length,
+                b = [],
+                j = 0;
+            if (size <= len)
+                for (let i = 0, k = 0; i < len; i++) {
+                    b[k] = arr[i];
+                    k++;
+                    if ((i + 1) % size === 0) {
+                        a[j] = b;
+                        b = [];
+                        j++;
+                        k = 0;
+                    }
+                }
+            if (b.length !== 0)
+                a[j] = b;
+            return a;
+        }
+        //Concatination of n arrays
+        function concat() {
+            let a = [],
+                k = 0;
+            for (let i = 0; i < arguments.length; i++) {
+                if (typeof(arguments[i]) === "object") {
+                    for (let j = 0; j < arguments[i].length; j++) {
+                        a[k] = arguments[i][j];
+                        k++;
+                    }
+                } else {
+                    a[k] = arguments[i];
+                    k++;
+                }
+            }
+            return a;
+        }
+        //Removing falsey values 0,null,false,undefined,"" and NaN
+        function compact(arr) {
+            let a = [];
+            console.log(arr);
+            for (let i = 0, j = 0; i < arr.length; i++) {
+                if (arr[i]) {
+                    a[j] = arr[i];
+                    j++;
+                }
+            }
+            return a;
+        }
+        //Creates a slice of array with n elements dropped from the beginning.
+        function drop(arr, n = 1) {
+            let a = [];
+            for (let i = n, j = 0; i < arr.length; i++, j++) {
+                a[j] = arr[i];
+            }
+            return a;
+        }
+        //Creates a slice of array with n elements dropped from the end.
+        function dropRight(arr, n = 1) {
+            let a = [];
+            for (let i = 0, j = 0; i < arr.length - n; i++, j++) {
+                a[j] = arr[i];
+            }
+            return a;
+        }
+        //Fills elements of array with value from start up to, but not including, end.
+        function fill(arr, val, start = 0, end = arr.length) {
+            if (end > arr.length)
+                end = arr.length;
+            for (let i = start; i < end; i++)
+                arr[i] = val;
+            return arr;
+        }
+        //Flattens array a single level deep.
+        function flatten(arr) {
+            let a = [],
+                j = 0;
+            for (let i = 0; i < arr.length; i++) {
+                if (typeof(arr[i]) === "object") {
+                    for (let k = 0; k < arr[i].length; k++) {
+                        a[j] = arr[i][k];
+                        j++;
+                    }
+                } else {
+                    a[j] = arr[i];
+                    j++;
+                }
+            }
+            return a;
+        }
+        //Recursively flattens array.
+        function flattenDeep(arr) {
+            let a = [],
+                j = 0,
+                recursive = 0;
+            for (let i = 0; i < arr.length; i++) {
+                if (typeof(arr[i]) === "object") {
+                    recursive = 1;
+                    for (let k = 0; k < arr[i].length; k++) {
+                        a[j] = arr[i][k];
+                        j++;
+                    }
+                } else {
+                    a[j] = arr[i];
+                    j++;
+                }
+            }
+            if (recursive === 0)
+                return a;
+            else
+                return flattenDeep(a);
+        }
+        //Recursively flatten array up to depth times.
+        function flattenDepth(arr, depth = 1) {
+            let a = [],
+                j = 0;
+            for (let i = 0; i < arr.length; i++) {
+                if (typeof(arr[i]) === "object") {
+                    for (let k = 0; k < arr[i].length; k++) {
+                        a[j] = arr[i][k];
+                        j++;
+                    }
+                } else {
+                    a[j] = arr[i];
+                    j++;
+                }
+            }
+            --depth;
+            if (depth === 0)
+                return a;
+            else
+                return flattenDepth(a, depth);
+        }
+        //this method returns an object composed from key-value pairs.
+        function fromPairs(arr) {
+            let a = {};
+            for (let i = 0; i < arr.length; i++) {
+                if (typeof(arr[i]) === "object") {
+                    a[arr[i][0]] = arr[i][1];
+                }
+            }
+            return a;
+        }
+        //Gets the first element of array.
+        function head(arr) {
+            return arr[0];
+        }
+        //index at which the first occurrence
+        function indexOf(arr, val, start = 0) {
+            for (let i = start; i < arr.length; i++) {
+                if (arr[i] === val) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        //Gets all but the last element of array.
+        function intial(arr) {
+            let a = [];
+            for (let i = 0; i < arr.length - 1; i++) {
+                a[i] = arr[i];
+            }
+            return a;
+        }
+        //intersection 
+        function intersection() {
+            let a;
+            for (let i = 0; i < arguments.length - 1; i++) {
+                a = [];
+                for (let j = 0, k = 0; j < arguments[i].length; j++) {
+                    if (indexOf(arguments[i + 1], arguments[i][j]) !== -1) {
+                        a[k] = arguments[i][j];
+                        k++;
+                    }
+                }
+                arguments[i + 1] = a;
+            }
+            return a;
+        }
+        //Converts all elements in array into a string separated by separator.
+        function join(arr, sep) {
+            let s = "";
+            for (let i = 0; i < arr.length; i++) {
+                if (i !== 0)
+                    s = s + sep + arr[i];
+            }
+            return s;
+        }
+        //Gets the element at index n of array. If n is negative, the nth element from the end is returned
+        function nth(arr, val) {
+            if (val >= 0)
+                return arr[val];
+            else
+                return arr[arr.length + val];
+        }
+        //pull array elements with values which are specified
+        function pull() {
+            let arr = arguments[0],
+                k = 0;
+            for (let i = 0; i < arr.length; i++) {
+                let count = 0;
+                for (let j = 1; j < arguments.length; j++) {
+                    if (arr[i] !== arguments[j])
+                        ++count;
+                }
+                if (count === arguments.length - 1) {
+                    arr[k] = arr[i];
+                    k++
+                }
+            }
+            arr.length = k;
+            return arr;
+        }
+        //pull array2 elements from array1
+        function pullAll(arr1, arr2) {
+            let k = 0;
+            for (let i = 0; i < arr1.length; i++) {
+                let count = 0;
+                for (let j = 0; j < arr2.length; j++) {
+                    if (arr1[i] != arr2[j])
+                        ++count;
+                }
+                if (count === arr2.length) {
+                    arr1[k] = arr1[i];
+                    k++;
+                }
+            }
+            arr1.length = k;
+            return arr1;
+        }
+        //pull array2 indexes from array1
+        function pullAt(arr1, arr2) {
+            for (let i = 0; i < arr2.length; i++) {
+                arr2[i] = arr1[arr2[i]];
+            }
+            arr1 = pullAll(arr1, arr2);
+            return arr2;
+        }
+        //Reverse elements based on condition
+        function reverse(arr) {
+            for (let i = 0, j = arr.length - 1; i < arr.length - 1; i++, j--) {
+                let temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+            return arr;
+        }
+    </script>
+</body>
+
+</html>
