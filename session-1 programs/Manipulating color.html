@@ -1,0 +1,17 @@
+//getting the color and setting the color to html elements
+<body>
+	<h1 id = '1'  style="color:blue;">Hi</h1>
+	<h2 id = '2'>Hello</h2>
+	<button onclick = "getcolor()">Get Color</button>
+	<br><br>
+	<button onclick = "setcolor()">Set Color</button>
+	<script>
+		function getcolor(){
+			var r1 = document.getElementById('1').getAttribute("style");
+			alert(r1);
+		}
+		function setcolor(){
+			var r2 = document.getElementById('2').setAttribute("style", "color:red");
+		}
+	</script>
+</body>

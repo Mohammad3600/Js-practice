@@ -1,0 +1,109 @@
+<html>
+
+<body>
+    <script>
+        function Node() {
+            let left;
+            let data;
+            let right;
+        }
+        let root = null;
+
+        function insertElement(val) {
+            let newNode = new Node();
+            newNode.left = null;
+            newNode.data = val;
+            newNode.right = null;
+            if (root === null) {
+                root = newNode;
+            } else {
+                parent = null;
+                current = root;
+                while (current !== null) {
+                    parent = current;
+                    if (val < current.data)
+                        current = current.left;
+                    else if (val > current.data)
+                        current = current.right;
+                    else
+                        return " Can't allow duplicates";
+                }
+                if (val < parent.data)
+                    parent.left = newNode;
+                else
+                    parent.right = newNode;
+            }
+            return root;
+        }
+
+        function preorder(node = root) {
+            if (node !== null) {
+                console.log(node.data);
+                preorder(node.left);
+                preorder(node.right);
+            }
+        }
+
+        function inorder(node = root) {
+            if (node !== null) {
+                inorder(node.left);
+                console.log(node.data);
+                inorder(node.right);
+            }
+        }
+
+        function postorder(node = root) {
+            if (node !== null) {
+                postorder(node.left);
+                postorder(node.right);
+                console.log(node.data);
+            }
+        }
+
+        function findSmallest(node = root) {
+            let min;
+            while (node && node.left !== null) {
+                node = node.left;
+            }
+            min = node.data;
+            return min;
+        }
+
+        function findLargest(node = root) {
+            let max;
+            while (node && node.right !== null) {
+                node = node.right;
+            }
+            max = node.data;
+            return max;
+        }
+
+        function deleteElement(val) {
+            root = deleteRec(root, val);
+            return root;
+        }
+
+        function deleteRec(tree, val) {
+            let current;
+            if (tree === null) {
+                console.log(val + "  is not present in the tree");
+                return tree;
+            }
+            if (val < tree.data)
+                tree.left = deleteRec(tree.left, val);
+            else if (val > tree.data)
+                tree.right = deleteRec(tree.right, val);
+            else {
+                if (tree.left === null)
+                    return tree.right;
+                else if (tree.right === null)
+                    return tree.left;
+                tree.data = findSmallest(tree.right);
+                tree.right = deleteRec(tree.right, tree.data);
+            }
+            return tree;
+        }
+    </script>
+</body>
+
+</html>

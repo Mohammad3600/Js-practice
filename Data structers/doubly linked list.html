@@ -1,0 +1,155 @@
+<html>
+
+<body>
+    <script>
+        function Node() {
+            let prev;
+            let data;
+            let next;
+        }
+        let head = null;
+
+        function insertAtBeg(val) {
+            let newNode = new Node();
+            newNode.data = val;
+            if (head === null) {
+                newNode.prev = null;
+                newNode.next = null;
+                head = newNode;
+            } else {
+                head.prev = newNode;
+                newNode.next = head;
+                newNode.prev = null;
+                head = newNode;
+            }
+            return head;
+        }
+
+        function insertAtEnd(val) {
+            let newNode = new Node();
+            newNode.data = val;
+            if (head === null) {
+                newNode.prev = null;
+                newNode.next = null;
+                head = newNode;
+            } else {
+                let current = head;
+                while (current.next) {
+                    current = current.next;
+                }
+                current.next = newNode;
+                newNode.prev = current;
+                newNode.next = null;
+            }
+            return head;
+        }
+
+        function insertAfter(val, after) {
+            let newNode = new Node();
+            newNode.data = val;
+            if (head === null) {
+                newNode.prev = null;
+                newNode.next = null;
+                head = newNode;
+            } else {
+                temp = head;
+                while (temp && temp.data !== after) {
+                    temp = temp.next;
+                }
+                if (temp && temp.data === after) {
+                    newNode.prev = temp;
+                    newNode.next = temp.next;
+                    temp.next = newNode;
+                }
+            }
+            return head;
+        }
+
+        function deleteAtBeg() {
+            let val;
+            if (head === null) {
+                console.log("deletion not possible");
+            } else {
+                if (head.next === null) {
+                    head = null;
+                } else {
+                    val = head.data;
+                    head = head.next;
+                    head.prev = null;
+                }
+            }
+            return val;
+        }
+
+        function deleteAtEnd() {
+            let val;
+            if (head === null) {
+                console.log("deletion not possible because list is Empty");
+                return;
+            } else {
+                if (head.next === null) {
+                    val = head.data;
+                    head = null;
+                } else {
+                    let current = head;
+                    while (current.next) {
+                        current = current.next;
+                    }
+                    val = current.data;
+                    current.prev.next = null;
+                }
+            }
+            return val;
+        }
+
+        function deleteSpecific(val) {
+            if (head === null)
+                console.log("List is Empty,Deletion not possible");
+            else {
+                let current = head;
+                if (current.data === val) {
+                    deleteAtBeg();
+                } else {
+                    while (current && current.data !== val) {
+                        current = current.next;
+                    }
+                    if (current && current.next === null && current.data === val) {
+                        deleteAtEnd();
+                    } else if (current && current.data === val) {
+                        current.prev.next = current.next;
+                        current.next.prev = current.prev;
+                    } else
+                        val += ' Not found';
+                }
+            }
+            return val;
+        }
+
+        function printList() {
+            let current = head;
+            while (current) {
+                console.log(current.data);
+                current = current.next;
+            }
+        }
+
+        function printListReverse() {
+            let current = head,
+                prev;
+            while (current) {
+                prev = current;
+                current = current.next;
+            }
+            current = prev;
+            while (current) {
+                console.log(current.data);
+                current = current.prev;
+            }
+        }
+        insertAtBeg(90);
+        insertAtBeg(60);
+        insertAtBeg(20);
+    </script>
+</body>
+
+</html>

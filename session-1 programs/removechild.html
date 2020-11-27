@@ -1,0 +1,21 @@
+//replacing and removing childs example
+<html>
+<body>
+<ul id="list">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+  <li>Item 4</li>
+  <li>Item 5</li>
+  <li>Item 6</li>
+</ul>
+<script>
+	let list = document.querySelector("#list");
+	let node1 = document.createElement('p');
+	let text1 = document.createTextNode('item replace');
+	node1.appendChild(text1);
+	list.replaceChild(node1,list.children[0]);
+	list.removeChild(list.children[5]);
+</script>
+</body>
+</html>

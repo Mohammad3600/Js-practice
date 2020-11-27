@@ -1,0 +1,31 @@
+<html>
+
+<body>
+    <h1>Event bubbling</h1>
+    <ul id=list>
+        <li id='1'>list1</li>
+        <li>list2</li>
+        <li>list3</li>
+        <li>list4</li>
+        <li id='2'>list5</li>
+    </ul>
+
+    <script>
+        let btn = document.getElementById('list');
+        btn.addEventListener('click', function(e) {
+            console.log("Parent click");
+        });
+        let btn1 = document.getElementById('1');
+        btn1.addEventListener('click', function(e) {
+            console.log("child click");
+        }, true);
+        let btn2 = document.getElementById('2');
+        btn2.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log("child click");
+        });
+    </script>
+
+</body>
+
+</html>

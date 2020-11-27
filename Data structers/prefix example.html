@@ -1,0 +1,39 @@
+<html>
+
+<body>
+    <script>
+        function computePostfix(exp) {
+            let stack = [];
+            for (let i = 0; i < exp.length; i++) {
+                if (exp[i] >= '0' && exp[i] <= '9') {
+                    stack.push(exp[i]);
+                } else if (exp[i] === '+') {
+                    val = Number(stack.pop()) + Number(stack.pop());
+                    stack.push(val);
+                } else if (exp[i] === '-') {
+                    val = stack.pop() - stack.pop();
+                    stack.push(val);
+                } else if (exp[i] === '*') {
+                    val = stack.pop() * stack.pop();
+                    stack.push(val);
+                } else if (exp[i] === '/') {
+                    val = stack.pop() / stack.pop();
+                    stack.push(val);
+                } else if (exp[i] === '%') {
+                    val = stack.pop() % stack.pop();
+                    stack.push(val);
+                }
+            }
+            return stack[stack.length - 1];
+        }
+
+        function computePrefix(exp) {
+            let s = "";
+            for (let i = 0; i < exp.length; i++)
+                s = exp[i] + s;
+            return computePostfix(s);
+        }
+    </script>
+</body>
+
+</html>

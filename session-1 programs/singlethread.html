@@ -1,0 +1,22 @@
+//Single Thread Example
+<html>
+<body>
+
+	<p id = 'para'> This is paragraph </p>
+	<button onclick = "start1()"> Click1 </button> 
+	<button onclick = "start2()"> Click2 </button>
+<script>
+	  function start2()
+	  {
+          for(let i = 0 ; i<100000; i++)
+	  {
+	  console.log("Mohammad"); // if click2 is clicked then click1 takes some time because of one thread running in js
+	  }
+	  }
+	  function start1()
+	  {
+      	  document.getElementById('para').innerHTML = "Change content";
+	  }
+</script	
+</body>
+</html>

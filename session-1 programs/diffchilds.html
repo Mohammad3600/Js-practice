@@ -1,0 +1,30 @@
+//differnce b/w childnodes and childrens
+<html>
+<body>
+<ul id="list">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+  <li>Item 4</li>
+  <li>Item 5</li>
+  <li>Item 6</li>
+</ul>
+<p id='p1' > </p><br>
+<p id='p2' > </p>
+<script>
+	let list = document.getElementById('list');
+	let result1='',result2='';
+	for(let i=0;i<list.childNodes.length;i++)
+	{
+		result1=result1+"      "+list.childNodes[i].nodeName; // here textnodes included as a childnodes
+	}
+	for(let i=0;i<list.children.length;i++)
+	{
+		result2=result2+"      "+list.children[i].nodeName; // only element nodes 
+	}
+
+	document.getElementById('p1').innerHTML=result1;
+	document.getElementById('p2').innerHTML=result2;
+</script>
+</body>
+</html>

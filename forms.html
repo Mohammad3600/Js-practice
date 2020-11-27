@@ -1,0 +1,31 @@
+<body>
+    <style>
+
+    </style>
+    <form>
+        <label for="name">First name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="last">Last name :</label>
+        <input type="text" id="last" name="last"><br><br>
+        <label for="fav">Choose Fav:</label>
+        <select id="fav" name="fav" multiple>
+            <option value="Cricket">Cricket</option>
+            <option value="Football">Football</option>
+            <option value="Tennis">Tennis</option>
+            <option value="Wrestling">Wrestling</option>
+        </select><br><br> Hobbie : <input list="hobbie">
+        <datalist id="hobbie">
+            <option value="playing cricket">
+            <option value="Reading books">
+            <option value="Watching Movies">
+        </datalist><br><br> Description:
+        <textarea name="desc" rows="10" cols="30"></textarea>
+        <input type="submit" name='submit'>
+    </form>
+
+    <script>
+        let forms = document.querySelector('form');
+        let data = new FormData(forms);
+        console.log(data);
+    </script>
+</body>

@@ -1,0 +1,32 @@
+<html>
+
+<body>
+    <h1>Event Delegation</h1>
+    <ul id=list>
+        <li>list1</li>
+        <li>list2</li>
+        <li>list3</li>
+        <li>list4</li>
+        <li>list5</li>
+    </ul>
+
+    <script>
+        let btn = document.getElementById('list');
+        btn.addEventListener('click', function(e) {
+            if (e.target && e.target.nodeName == 'LI') {
+                console.log(e.target.nodeName + " was clicked");
+            }
+        });
+        let p = document.createElement("p");
+        let text = document.createTextNode("this is para");
+        p.appendChild(text);
+        btn.appendChild(p);
+        let li = document.createElement("li");
+        text = document.createTextNode("list6");
+        li.appendChild(text);
+        btn.appendChild(li);
+    </script>
+
+</body>
+
+</html>
