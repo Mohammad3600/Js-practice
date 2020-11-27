@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <input type="checkbox" id="check" />
+    <script>
+        let btn = document.getElementById('check');
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log("checkbox default action is prevented");
+        });
+    </script>
+
+</body>
+
+</html>
