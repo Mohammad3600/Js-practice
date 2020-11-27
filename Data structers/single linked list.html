@@ -1,0 +1,129 @@
+<html>
+
+<body>
+    <script>
+        let head = null;
+
+        function Node() {
+            let data;
+            let next;
+        }
+
+        function insertAtBeg(val) {
+            let newNode = new Node();
+            newNode.data = val;
+            console.log(newNode.data);
+            if (head === null) {
+                newNode.next = null;
+                head = newNode;
+            } else {
+                newNode.next = head;
+                head = newNode;
+            }
+            return head;
+        }
+
+        function insertAfter(val, after) {
+            let newNode = new Node();
+            newNode.data = val;
+            if (head === null) {
+                newNode.next = null;
+                head = newNode;
+            } else {
+                temp = head.next, pretemp = head;
+                while (pretemp.data !== after && temp) {
+                    pretemp = temp;
+                    temp = temp.next;
+                }
+                if (pretemp.data === after) {
+                    newNode.next = temp;
+                    pretemp.next = newNode;
+                }
+            }
+            return head;
+        }
+
+
+
+        function insertAtEnd(val) {
+            let newNode = new Node();
+            newNode.data = val;
+            newNode.next = null;
+            if (head === null) {
+                head = newNode;
+            } else {
+                let last = head;
+                while (last.next !== null) {
+                    last = last.next;
+                }
+                last.next = newNode;
+            }
+            return head;
+        }
+
+        function deleteAtBeg() {
+            if (head === null)
+                console.log("List is Empty,Deletion not possible");
+            else {
+                let temp = head;
+                if (temp.next === null)
+                    head = null;
+                else {
+                    head = temp.next;
+                }
+                return temp.data;
+            }
+        }
+
+        function deleteAtEnd() {
+            if (head === null)
+                console.log("List is Empty,Deletion not possible");
+            else {
+                let temp1 = head,
+                    temp2;
+                if (temp1.next === null) {
+                    head = null;
+                } else {
+                    while (temp1.next !== null) {
+                        temp2 = temp1;
+                        temp1 = temp1.next;
+                    }
+                    temp2.next = null;
+                }
+                return temp1.data;
+            }
+        }
+
+        function deleteSpecific(val) {
+            if (head === null)
+                console.log("List is Empty,Deletion not possible");
+            else {
+                let current = head,
+                    temp;
+                if (current.data === val) {
+                    head = current.next;
+                } else {
+                    while (current !== null && current.data !== val) {
+                        temp = current;
+                        current = current.next;
+                    }
+                    if (current !== null && current.data === val) {
+                        temp.next = current.next;
+                    } else
+                        val = val + " Not found and Deletion not possible";
+                }
+                return val;
+            }
+        }
+
+        function printList() {
+            let current = head;
+            while (current) {
+                console.log(current.data);
+                current = current.next;
+            }
+        }
+    </script>
+</body>
+
+</html>

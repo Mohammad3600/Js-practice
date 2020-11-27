@@ -1,0 +1,80 @@
+<html>
+
+<body>
+    <script>
+        Array.prototype.isEmpty = function() {
+            if (this.length)
+                return false;
+            return true;
+        }
+        Array.prototype.peek = function() {
+            return this[this.length - 1];
+        }
+
+        function computeinfix(exp) {
+            let stack1 = [],
+                stack2 = [];
+            for (let i = 0; i < exp.length; i++) {
+                if (exp[i] >= '0' && exp[i] <= '9') {
+                    let j = 1,
+                        val = Number(exp[i]);
+                    while (exp[i + j] >= '0' && exp[i + j] <= '9') {
+                        val = val * 10 + Number(exp[i + j]);
+                        j++;
+                    }
+                    i = i + j - 1;
+                    stack1.push(val);
+                } else if (exp[i] === '(')
+                    stack2.push(exp[i]);
+                else if (exp[i] === ')') {
+                    while (stack2.peek() !== '(') {
+                        let output = performOperation(stack1, stack2);
+                        stack1.push(output);
+                    }
+                    stack2.pop();
+                } else if (isOperator(exp[i])) {
+                    while (!stack2.isEmpty() && precedence(exp[i]) <= precedence(stack2.peek())) {
+                        let output = performOperation(stack1, stack2);
+                        stack1.push(output);
+                    }
+                    stack2.push(exp[i]);
+                }
+            }
+            while (!stack2.isEmpty()) {
+                let output = performOperation(stack1, stack2);
+                stack1.push(output);
+            }
+            return stack1.pop();
+        }
+
+        function precedence(c) {
+            if (c === '+' || c === '-')
+                return 1;
+            else if (c === '*' || c === '/' || c === '%')
+                return 2;
+            return -1;
+        }
+
+        function isOperator(c) {
+            return c === '+' || c === '-' || c === '*' || c === '/' || c === '%';
+        }
+
+        function performOperation(nums, ops) {
+            let a = nums.pop();
+            let b = nums.pop();
+            let c = ops.pop();
+            if (c === '+')
+                return a + b;
+            else if (c === '-')
+                return b - a;
+            else if (c === '*')
+                return a * b;
+            else if (c === '/')
+                return b / a;
+            else if (c === '%')
+                return b % a;
+        }
+    </script>
+</body>
+
+</html>

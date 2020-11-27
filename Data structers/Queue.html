@@ -1,0 +1,50 @@
+<html>
+
+<body>
+    <script>
+        let queue = [];
+
+        function enqueue() {
+            let len1 = arguments.length;
+            let len2 = queue.length;
+            for (let i = len2 - 1, j = len1 + len2 - 1; i >= 0; i--, j--) {
+                queue[j] = queue[i];
+            }
+            for (let i = 0; i < len1; i++) {
+                queue[i] = arguments[len1 - 1 - i];
+            }
+            return queue;
+        }
+
+        function dequeue(n = 1) {
+            if (queue.length) {
+                let val = [];
+                if (n > queue.length)
+                    n = queue.length;
+                for (let i = 0; i < n; i++) {
+                    val[i] = queue[queue.length - 1]
+                    queue.length -= 1;
+                }
+                return val;
+            } else
+                console.log("Queue is empty");
+        }
+
+        function rear() {
+            if (queue.length)
+                return queue[0];
+            else
+                console.log("Queue is Empty");
+        }
+
+        function front() {
+            if (queue.length)
+                return queue[queue.length - 1];
+            else
+                console.log("Queue is Empty");
+
+        }
+    </script>
+</body>
+
+</html>

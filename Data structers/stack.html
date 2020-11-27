@@ -1,0 +1,44 @@
+<html>
+
+<body>
+    <script>
+        let stack = [];
+
+        function push() {
+            for (let i = 0; i < arguments.length; i++) {
+                stack[stack.length] = arguments[i];
+            }
+            return stack;
+        }
+
+        function pop(n = 1) {
+            if (!isEmpty()) {
+                let val = [];
+                if (n > stack.length)
+                    n = stack.length;
+                for (let i = 0; i < n; i++) {
+                    val[i] = stack[stack.length - 1]
+                    stack.length -= 1;
+                }
+                return val;
+            } else
+                console.log("Can't pop the element because Stack is empty");
+        }
+
+        function isEmpty() {
+            if (stack.length)
+                return false;
+            else
+                return true;
+        }
+
+        function topElement() {
+            if (isEmpty())
+                return stack[stack.length - 1];
+            else
+                console.log("Stack is Empty");
+        }
+    </script>
+</body>
+
+</html>
