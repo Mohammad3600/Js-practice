@@ -1,0 +1,67 @@
+<html>
+
+<body>
+    <script>
+        //snippet 1
+        function PrintStuff(myDocuments) {
+            this.documents = myDocuments;
+        }
+
+        PrintStuff.prototype.print = function() {
+            console.log(this.documents);
+        }
+        var newObj = new PrintStuff("I am a new Object and I can print.");
+        newObj.print();
+
+
+
+        //snippet 2
+        var myObj = new Object();
+        console.log(myObj.constructor); //Object()
+        function Account() {}
+        var userAccount = new Account();
+        console.log(userAccount.constructor); // Account()
+
+
+
+        //snippet3
+        function Plant() {
+            this.country = "India";
+            this.isOrganic = true;
+        }
+
+        Plant.prototype.showNameAndColor = function() {
+            console.log("I am a " + this.name + " and my color is " + this.color);
+        }
+
+        function Fruit(fruitName, fruitColor) {
+            this.name = fruitName;
+            this.color = fruitColor;
+        }
+
+        Fruit.prototype = new Plant();
+        var apple = new Fruit("Apple", "red");
+        console.log(apple.name); // Apple
+        console.log(apple.showNameAndColor()); // I am a Apple and my color is red.
+
+
+
+        //snippet4
+        function People() {
+            this.superstar = "dwayne Jahnson";
+        }
+        People.prototype.athlete = "John";
+
+        var famousPerson = new People();
+        famousPerson.superstar = "Robert.Jr";
+        console.log(famousPerson.superstar); // Robert.Jr
+        console.log(famousPerson.athlete); // John
+        console.log(famousPerson.toString()); //[object Object]
+        People.prototype.toString = function() {
+            return this.superstar;
+        };
+        console.log(famousPerson.toString()); //Robert.Jr
+    </script>
+</body>
+
+</html>

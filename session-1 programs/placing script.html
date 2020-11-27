@@ -1,0 +1,14 @@
+// What will happen when you place script at head and body
+<html>
+	<head>
+		<script>
+			console.log("Head: "+ document.body); //Dom is halted 
+		</script>
+	</head>
+	<body>
+		This is Body
+		<script>
+			console.log("Body: "+ document.body); //Dom is not halted
+		</script>
+	</body>
+</html> 

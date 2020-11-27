@@ -1,0 +1,36 @@
+//fetching all descendants of node
+<html>
+<body>
+<main>
+  <h1>Today's articles</h1>
+  <article id="article-1">
+    <h2 id='head2'>First Contact with Alien Beings in History of Mankind</h2>
+    <section>
+      <p id='p1'>Finally! They are here.....</p>
+      <p>What do we do now!?</p>
+    </section>
+  </article>
+
+  <article id="article-2">
+    <h2>How to find relief</h2>
+    <section>
+      <p>If you are in need of stress relief ...</p>
+      <p id='para'></p>
+    </section>
+  </article>
+</main>
+<script>
+const article1 = document.querySelector("#head2");
+var parent1=article1.parentNode;
+console.log(parent1.childNodes);
+let result='';
+while(parent1!=null)
+{
+result=result+' '+parent1.nodeName;
+parent1=parent1.parentNode;
+}
+//console.log(result);
+document.getElementById('para').innerHTML=result;
+</script>
+</body>
+<html>

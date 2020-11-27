@@ -1,0 +1,51 @@
+<html>
+
+<body>
+    <script>
+        let person = {
+            name: 'John',
+            age: 28
+        };
+        delete person.age; //true
+        console.log(person.age);
+        Object.defineProperty(person, 'age', {
+            configurable: false,
+            value: 28
+        });
+        delete person.age; //false
+        console.log(person.age);
+        Object.defineProperty(person, 'age', {
+            configurable: true,
+        }); //can't redefine
+
+
+        //snippet 2
+        let student = {
+            firstname: 'Dwayne',
+            lastname: 'Johnson',
+            fullname() {
+                return this.firstname + ' ' + this.lastname
+            }
+        };
+        student.fullname(); //"Dwayne Johnson" 
+
+        //snippet 3
+        let student = {
+            firstname: 'Dwayne',
+            lastname: 'Johnson',
+            get fullname() {
+                return this.firstname + ' ' + this.lastname
+            },
+            set fullname(value) {
+                let name = value.split(' ');
+                this.firstname = name[0];
+                this.lastname = name[1];
+            }
+        };
+        student.fullname;
+        student.fullname = 'Robert Jr';
+        console.log(Object.getOwnPropertyDescriptor(student, 'firstname')); // description
+    </script>
+</body>
+
+</html>

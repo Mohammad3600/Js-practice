@@ -1,0 +1,28 @@
+// fetching parent's sibling childs
+<html>
+<body>
+<ul id="list">
+  <li id='fi'>idli</li>
+  <li>dosa</li>
+  <li>poori</li>
+</ul>
+<ul>
+  <li>noodles</li>
+  <li>fried chicken</li>
+  <li>gobi</li>
+</ul>
+<p>idli parent's sibling childs appear here </p>
+<p id='p1' > </p><br> 
+<script>
+	let list = document.getElementById('fi');
+	let next = fi.parentNode.nextElementSibling;
+	console.log(next.nodeName);
+	let result1 = '  ';
+	for(let i=0;i<next.children.length;i++)
+	{
+	result1 = result1 +'<br>'+next.children[i].textContent;
+	}
+	document.getElementById('p1').innerHTML=result1; // all parent's sibling childs appear here
+</script>
+</body>
+</html>

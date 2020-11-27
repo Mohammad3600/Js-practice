@@ -1,0 +1,49 @@
+<html>
+
+<body>
+    <button id='bt1' onclick='getData();'>GET</button><br><br>
+    <button id='bt2' onclick='sendData()'>POST</button>
+    <script>
+        let bt1 = document.getElementById('bt1');
+        let bt2 = document.getElementById('bt2');
+
+        //send http request
+        let sendhttp = function(method, url, data) {
+            let promise = new Promise(function(resolve, reject) {
+                let xhr = new XMLHttpRequest();
+                xhr.open(method, url);
+                xhr.responseType = 'json';
+                if (data) {
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                }
+                xhr.onload = function() {
+
+                    resolve(xhr.response);
+                };
+                xhr.onerror = function() {
+                    reject('Something went wrong')
+                }
+                xhr.send(JSON.stringify(data));
+            });
+            return promise;
+        }
+
+        let getData = function() {
+            sendhttp('GET', 'https://reqres.in/api/users').then(responseData => {
+                console.log(responseData);
+            });
+        }
+        let sendData = function() {
+            sendhttp('POST', 'https://reqres.in/api/register', {
+                email: "eve.holt@reqres.in",
+                password: "pistol"
+            }).then(function(responseData) {
+                console.log(responseData)
+            }).catch(function(err) {
+                console.log(err);
+            });
+        }
+    </script>
+</body>
+
+</html>
