@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Keyboard Events</title>
+</head>
+
+<body>
+    <form>
+        <label for='phone'>Phone Number</label>
+        <input type='text' id='phone'><br>
+        <label for='name'>Name</label>
+        <input type='text' id='name'>
+    </form>
+
+    <div id='en'></div>
+    <script>
+        let phone = document.querySelector('#phone');
+        let name = document.querySelector('#name');
+        phone.onkeyup = function(e) {
+            console.log(e.key);
+            if ((e.key >= '0' && e.key <= '9') || e.key == '-' || e.key == '+' || e.key == 'ArrowLeft' || e.key == 'ArrowRight' || e.key == 'Backspace' || e.key == 'Delete' || e.key == ' ') {
+                return true;
+            } else if (e.keyCode == 9) {
+                console.log('hii');
+            } else {
+                if (e.key != 'Shift' && e.key != 'Tab' && e.key != 'CapsLock' && e.key != 'Meta' && e.key != 'Control') {
+                    this.value = this.value.slice(0, this.value.length - 1);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

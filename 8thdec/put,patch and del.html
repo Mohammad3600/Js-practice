@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Put,patch and delete</title>
+</head>
+
+<body>
+
+    <script>
+        fetch("https://reqres.in/api/users/2", {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json'
+                },
+
+            })
+            .then(function(res) {
+                return res.json();
+            })
+            .then(function(data) {
+                console.log(data);
+            });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nested forms</title>
+</head>
+
+<body>
+
+
+    <form id='1'>
+        <label>contact list</label><br>
+        <input type='text'><br>
+        <form id='inner'>
+            <input type='text'><br>
+            <input type='text'><br>
+            <form id=innerchild>
+                <input type='submit'>
+            </form>
+
+        </form>
+        <input type='submit'>
+    </form>
+    <script>
+        let id1 = document.getElementById('1');
+        let id2 = document.getElementById('inner'); //null
+        let forms = document.forms;
+        console.log(forms[0], forms[1]);
+        id1.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('parent');
+        })
+    </script>
+</body>
+
+</html>
