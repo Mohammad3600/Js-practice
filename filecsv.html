@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML file upload</title>
+</head>
+
+<body>
+    <form name='first'>
+        <input type="file" id='file' name="csvfile" accept=".csv" multiple>
+        <div id='1'></div><br/>
+        <input type="submit" value="submit">
+    </form>
+    <script>
+        let files = document.getElementById('file');
+        let form = document.forms.first;
+        console.log(form);
+        let div = document.getElementById('1');
+        let flag = 0;
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            // console.log(files.files.length);
+            if (files.files.length === 2) {
+                form.submit();
+            } else {
+                div.innerHTML = "Only 2 files are allowed";
+                div.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+
+</html>
