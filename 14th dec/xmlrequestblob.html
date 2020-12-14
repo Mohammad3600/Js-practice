@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blob XML request</title>
+</head>
+
+<body>
+    <form enctype="multipart/form-data">
+        <input type='file' id='file'>
+    </form>
+    <script>
+        let file = document.getElementById('file');
+        let blobData;
+        file.onchange = function() {
+            blobData = new Blob([file.files[0]]);
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.open('POST', 'https://reqres.in/api/users', true);
+            xhr.send(blobData);
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status <= 300) {
+                    console.log(xhr.response);
+                } else {
+                    console.log('failed');
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>

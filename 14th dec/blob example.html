@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blob Example</title>
+</head>
+
+<body>
+    <h1>Blob</h1><br>
+    <a id="link" download="text.txt">Download file</a><br>
+    <script>
+        let link = document.querySelector('#link');
+        let blob = new Blob(['Hello ', 'world'], {
+            type: 'text/plain'
+        });
+        link.href = URL.createObjectURL(blob);
+        console.log(link.href);
+        console.log("size :", blob.size, "type :", blob.type);
+        //duplicate blob
+        let dup = blob.slice(0, 11);
+        dup.text().then(function(res) {
+            console.log("duplicate blob..", res);
+        });
+        //Reading Blob using FileReader
+        let reader = new FileReader();
+        reader.readAsText(blob);
+        // reader.readAsArrayBuffer(blob);
+        reader.addEventListener('loadend', function() {
+            console.log('from filereader', reader.result);
+        });
+        //duplicate blob
+        blob.text().then(function(res) {
+            console.log("blob text...", res);
+        });
+    </script>
+</body>
+
+</html>

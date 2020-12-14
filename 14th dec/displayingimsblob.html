@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Displaying image</title>
+</head>
+
+<body>
+    <form name='imageForm' enctype="multipart/form-data">
+        <label for='img'>Select a Image</label>
+        <input type='file' id=img accept="image/*">
+    </form>
+    <div></div>
+    <script>
+        //Displaying image
+        let input = document.querySelector('input')
+        input.addEventListener('change', function() {
+            let img = document.createElement('img');
+            let imageBlob = URL.createObjectURL(input.files[0]);
+            img.src = imageBlob;
+            img.onload = function() {
+                URL.revokeObjectURL(imageBlob);
+            }
+            document.querySelector('div').appendChild(img);
+        });
+    </script>
+    <!-- <form name='imageForm' enctype="multipart/form-data">
+        <label for='img'>Select a Image</label>
+        <input type='file' id=img>
+    </form>
+    <p id='para'></p>
+    <script>
+        //Displaying image
+        let input = document.querySelector('input')
+        input.addEventListener('change', function() {
+            let blob = new Blob([input.files[0]], {
+                type: 'text/plain'
+            });
+            console.log(blob.type);
+            let res = blob.text().then(function(res) {
+                let a = document.createTextNode(res);
+                document.getElementById('para').appendChild(a);
+            });
+        }); -->
+    </script>
+</body>
+
+</html>
