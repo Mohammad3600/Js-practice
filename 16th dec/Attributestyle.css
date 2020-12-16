@@ -1,0 +1,19 @@
+.div1>[id |='list'] {
+    color: rgba(0, 0, 255, 0.712);
+}
+
+.div2>[id ^='list'] {
+    color: rgba(0, 0, 255, 0.712);
+}
+
+.div3>[id *='list'] {
+    color: rgba(0, 0, 255, 0.712);
+}
+
+.div4>[id~='list'] {
+    color: rgba(0, 0, 255, 0.712);
+}
+
+.div5>[id $='list'] {
+    color: rgba(0, 0, 255, 0.712);
+}

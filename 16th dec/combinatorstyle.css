@@ -1,0 +1,19 @@
+/* ul li {
+    color: rgba(0, 17, 255, 0.945);
+}
+
+ul>li {
+    color: rgba(0, 255, 0, 0.945);
+}
+
+div~p {
+    color: rgba(255, 0, 0, 0.904);
+}
+
+div+p {
+    color: rgba(0, 17, 255, 0.945);
+} */
+
+.great>div {
+    color: rgba(255, 68, 0, 0.904);
+}
