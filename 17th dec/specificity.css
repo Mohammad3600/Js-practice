@@ -1,0 +1,23 @@
+#box {
+    color: rgb(0, 128, 0);
+}
+
+.container {
+    color: rgb(68, 0, 255);
+}
+
+h1 {
+    color: rgb(255, 93, 120) !important;
+}
+
+[class='container'] {
+    color: rgb(97, 210, 255);
+}
+
+p#para {
+    color: red;
+}
+
+#para {
+    color: rgb(252, 255, 59);
+}
