@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+    <title>User Registration Form</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="resposive_website_styles.css">
+</head>
+
+<body>
+    <div class='userFields'>
+        <h1 class='header'>User Registration Form</h1>
+        <form id='userForm' autocomplete="off">
+            <div class='userfield-1'>
+                <div class='first-name'>
+                    <label for='firstname'>First Name</label>
+                    <input type='text' id='firstname' name='firstname' placeholder="Enter First Name">
+                </div>
+                <div class='last-name'>
+                    <label for='lastname'>Last Name</label>
+                    <input type='text' id='lastname' name='lastname' placeholder="Enter Last Name">
+                </div>
+            </div>
+            <div id='nameError'></div>
+            <div class='userfield-3'>
+                <label for='email'>Email</label>
+                <input type='text' id='email' name='email' placeholder="Enter Email">
+                <div id='emailError'></div>
+            </div>
+            <div class='userfield-4'>
+                <label for='Phone'>Phone Number</label>
+                <input type='text' id='phone' name='phone' placeholder="Enter Phone Number">
+                <div id='phoneError'></div>
+            </div>
+            <div class='userfield-5'>
+                <label for='password'>Password</label>
+                <input type='password' id='password' name='password' placeholder="Password">
+            </div>
+            <div class='userfield-6'>
+                <label for='confirmpassword'>Confirm Password</label>
+                <input type='password' id='confirmpassword' name='confirmpassword' placeholder="Confirm Password">
+            </div>
+            <div class='userfield-7'>
+                <input type='submit' id='submit' value='Register'>
+            </div>
+        </form>
+    </div>
+</body>
