@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Container</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        
+        body {
+            background-color: gainsboro;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, max(300px));
+            grid-template-rows: repeat(auto-fill, max(400px));
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .parent {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 5px 5px 5px rgba(167, 157, 255, 0.6);
+        }
+        
+        img {
+            height: 250px;
+            width: 250px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Grid Example</h1>
+    <div class="grid-container">
+        <div class="parent">
+            <div class="child1">
+                <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1426803822l/23448360.jpg" alt="Big Hero 6">
+                <div><b>Title :Big Hero 6</b></div>
+                <div>
+                    A special bond develops between plus-sized inflatable robot Baymax and prodigy Hiro Hamada, who together team up with a group of friends to form a band of high-tech heroes.
+                </div>
+            </div>
+        </div>
+        <div class="parent">
+            <div class="child2">
+                <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1309213226l/510746.jpg" alt="Jackie Chan Adventures">
+                <div><b>Title :Jackie Chan Adventures</b></div>
+                <div>A special bond develops between plus-sized inflatable robot Baymax and prodigy Hiro Hamada, who together team up with a group of friends to form a band of high-tech heroes.</div>
+            </div>
+        </div>
+        <div class="parent">
+            <div class="child3">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/71GA+b7Nz7L.jpg" alt="Sponge bob">
+                <div><b>Title :Sponge bob</b></div>
+                <div>A special bond develops between plus-sized inflatable robot Baymax and prodigy Hiro Hamada, who together team up with a group of friends to form a band of high-tech heroes.</div>
+            </div>
+        </div>
+        <div class="parent">
+            <div class="child1">
+                <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1426803822l/23448360.jpg" alt="Big Hero 6">
+                <div><b>Title :Big Hero 6</b></div>
+                <div>
+                    A special bond develops between plus-sized inflatable robot Baymax and prodigy Hiro Hamada, who together team up with a group of friends to form a band of high-tech heroes.
+                </div>
+            </div>
+        </div>
+        <div class="parent">
+            <div class="child2">
+                <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1309213226l/510746.jpg" alt="Jackie Chan Adventures">
+                <div><b>Title :Jackie Chan Adventures</b></div>
+                <div>A special bond develops between plus-sized inflatable robot Baymax and prodigy Hiro Hamada, who together team up with a group of friends to form a band of high-tech heroes.</div>
+            </div>
+        </div>
+        <div class="parent">
+            <div class="child3">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/71GA+b7Nz7L.jpg" alt="Sponge bob">
+                <div><b>Title :Sponge bob</b></div>
+                <div>A special bond develops between plus-sized inflatable robot Baymax and prodigy Hiro Hamada, who together team up with a group of friends to form a band of high-tech heroes.</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
