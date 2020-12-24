@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Customerstyle.css">
+    <script src="https://kit.fontawesome.com/84c7f42d8e.js"></script>
+    <title>Customer Page</title>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class='nav-content'>
+            <i class="fas fa-money-check-alt"></i>
+            <h1>ACS BANK</h1>
+            <p>Your trust is our investment</p>
+        </div>
+        <div class='nav-content'>
+            <i class="fas fa-sign-out-alt" title="Logout" id='Logout'></i>
+        </div>
+    </nav>
+    <Header id="details">
+        <div class="customer-Id">
+            <label>Customer Id</label>
+            <label id="id"></label>
+        </div>
+        <div class="customer-name">
+            <label>Customer Name</label>
+            <label id="name"></label>
+        </div>
+    </Header>
+    <div class='account-navigation'>
+        <div class="select savings-dropdown">Saving Account</div>
+        <div class="Deposite-dropdown">Fixed Deposit</div>
+    </div>
+    <div class="savings-container">
+        <div class="money-container">
+            <div class='credit-container'>
+                <input type="text" class='money' name='money' placeholder="Add Money to Savings Account">
+                <input type="button" class='addMoney' id='add' value="Add Money">
+                <div class="errorMsg-1"></div>
+            </div>
+            <div class='debit-container'>
+                <input type="text" class='money-debit' name='money' placeholder="Debit Money from Savings Account">
+                <input type="button" class='addMoney' id='debit' value="debit Money">
+                <div class="errorMsg-2"></div>
+            </div>
+        </div>
+        <div class="balance">
+            <label>Total Balance :</label>
+            <label class="display-balance"></label>
+        </div>
+
+        <table class='Transaction-table'>
+            <caption>Transactions-List</caption>
+            <tr>
+                <th>DATE</th>
+                <th>TRANSACTION TYPE</th>
+                <th>AMOUNT</th>
+            </tr>
+        </table>
+    </div>
+    <div class="switch deposite-container">
+        <label id='plan-label'>Plans</label>
+        <div class='plans'>
+            <input type="radio" value="1" name='plan' id='plan1' checked>
+            <label for="plan1">1 Year (6% Interest)</label>
+            <input type="radio" value="5" name='plan' id='plan2'>
+            <label for="plan2">5 Years (6.5% Interest)</label>
+        </div>
+        <input type="text" class='amount' name='money' placeholder="Add Amount to Fixed Deposit">
+        <input type="button" class='addAmount' value="Add Plan" onclick="addAmount()">
+        <div class="errorMsg-3"></div>
+        <table class='FixedDeposite-table'>
+            <caption>Fixed-Deposit Plans</caption>
+            <tr>
+                <th>VALUE DATE</th>
+                <th>PLAN TYPE</th>
+                <th>AMOUNT</th>
+                <th>ESTIMATED AMOUNT</th>
+                <th>MATURITY DATE</th>
+            </tr>
+        </table>
+    </div>
+    <script type="text/JavaScript" src="CustomerDetails.js" defer></script>
+    <script type="text/JavaScript" src="Calculations.js" defer></script>
+</body>
+
+</html>

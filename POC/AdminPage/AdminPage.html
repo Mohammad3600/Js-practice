@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Adminstyle.css">
+    <script src="https://kit.fontawesome.com/84c7f42d8e.js"></script>
+    <title>Admin Page</title>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class='nav-content'>
+            <i class="fas fa-money-check-alt"></i>
+            <h1>ACS BANK</h1>
+            <p>Your trust is our investment</p>
+        </div>
+        <div class='nav-content'>
+            <i class="fas fa-sign-out-alt" id="Logout" title="Logout"></i>
+        </div>
+    </nav>
+    <Header id="details">
+        <div class="admin-Id">
+            <label>Admin Id</label>
+            <label id="id"></label>
+        </div>
+        <div class="admin-name"></div>
+        <label>Admin Name</label>
+        <label id="name"></label>
+        </div>
+    </Header>
+    <div class='account-navigation'>
+        <div class="select bank-dropdown">Bank Amount Details</div>
+        <div class="savings-dropdown">All Saving Accounts</div>
+        <div class="deposite-dropdown">All Fixed Deposits</div>
+    </div>
+    <div class="bank-container">
+        <label>Total Saving Accounts Amount:</label>
+        <label class='amount-1'></label>
+        <label>Total Fixed Deposits Amount:</label>
+        <label class='amount-2'></label>
+    </div>
+    <div class="switch savings-container">
+        <table id="savings-table">
+            <caption>All Savings account Users</caption>
+            <tr>
+                <th>CUSTOMER ID</th>
+                <th>CUSTOMER NAME</th>
+                <th>BALANCE</th>
+            </tr>
+        </table>
+    </div>
+    <div class="switch deposites-container">
+        <table id="deposites-table">
+            <caption>All Fixed Deposit Users</caption>
+            <tr>
+                <th>CUSTOMER ID</th>
+                <th>CUSTOMER NAME</th>
+                <th>VALUE DATE</th>
+                <th>PLAN TYPE</th>
+                <th>AMOUNT</th>
+                <th>ESTIMATED AMOUNT</th>
+                <th>MATURITY DATE</th>
+            </tr>
+        </table>
+    </div>
+    <script type="text/JavaScript" src="AccountsDetails.js"></script>
+    <script type="text/JavaScript" src="../CustomerPage/Calculations.js"></script>
+</body>
+
+</html>

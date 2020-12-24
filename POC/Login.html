@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/84c7f42d8e.js"></script>
+    <link rel="stylesheet" href="Loginstyle.css">
+    <title>Bank Fund Mangaement System</title>
+</head>
+
+<body>
+    <header class='header'>
+        <div class="bank-title">
+            <i class="fas fa-money-check-alt"></i>
+            <h1>ACS BANK</h1>
+        </div>
+        <nav>
+            <div class='nav-1'>Admin</div>
+            <div class='nav-2 navigation'>Customer</div>
+        </nav>
+    </header>
+    <div class="Login-container">
+        <h1>Login to ACS Bank</h1>
+        <form name='UserForm' class='UserForm' onsubmit="checkDetails(event)" autocomplete="off">
+            <label for="userid" name='id'>Customer ID</label>
+            <input type="text" id='userid' name='customerid'>
+            <div id='idError'></div>
+            <lable for='password'>Password</lable>
+            <input type="password" id='password' name='password'>
+            <div id='passwordError'></div>
+            <input type="submit" value='Login' name='submit'>
+        </form>
+    </div>
+    <script type="text/JavaScript" src="BankScript.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+* {
+    margin: 0px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+i {
+    font-size: 2em;
+}
+
+h1 {
+    font-size: 2rem;
+    display: inline-block;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    background-color: rgb(26, 0, 170);
+    padding: 15px 30px;
+    box-shadow: 5px 5px 5px rgba(167, 157, 255, 0.6);
+    justify-content: space-between;
+    align-items: center;
+}
+
+p {
+    margin-left: 120px;
+}
+
+.fa-sign-out-alt:hover {
+    color: rgb(0, 209, 216);
+}
+
+#details {
+    padding: 1em;
+}
+
+label {
+    display: inline-block;
+    font-weight: bold;
+    width: 150px;
+    text-align: left;
+    padding: 0.5em;
+    font-size: 1.2em;
+}
+
+.account-navigation {
+    background-color: rgb(26, 0, 170);
+    display: flex;
+    flex-wrap: wrap;
+    color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px rgba(167, 157, 255, 0.6);
+}
+
+[class*="-dropdown"] {
+    padding: 10px;
+    cursor: pointer;
+}
+
+[class*="-dropdown"]:hover {
+    background-color: rgb(36, 0, 243);
+}
+
+.bank-container label {
+    width: auto;
+}
+
+[class^='amount-'] {
+    color: rgb(0, 81, 95);
+    font-size: 2em;
+}
+
+[class$='-container'] {
+    margin: 20px;
+}
+
+.bank-container {
+    font-size: 1.5em;
+    margin-top: 3em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+caption {
+    font-weight: bold;
+    font-size: 1.5em;
+    background-color: #0045a0;
+    padding: 5px;
+    color: rgb(255, 255, 255);
+}
+
+.savings-container table {
+    font-size: 1.2em;
+}
+
+table,
+th,
+td {
+    font-size: 1.0em;
+    padding: 12px 50px;
+}
+
+td {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dfdfdf
+}
+
+th {
+    background-color: #3a69a7;
+    color: white;
+}
+
+#savings-table tr>:nth-child(3)::before,
+#deposites-table tr>:nth-child(5)::before,
+#deposites-table tr>:nth-child(6)::before,
+[class^="amount-"]::before {
+    content: "₹ ";
+}
+
+.select {
+    background-color: rgb(36, 0, 243);
+}
+
+.switch {
+    display: none;
+}

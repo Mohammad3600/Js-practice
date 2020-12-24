@@ -1,0 +1,182 @@
+* {
+    margin: 0px;
+}
+
+i {
+    font-size: 2em;
+}
+
+h1 {
+    font-size: 2rem;
+    display: inline-block;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+nav {
+    display: flex;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    background-color: rgb(26, 0, 170);
+    padding: 15px 30px;
+    box-shadow: 5px 5px 5px rgba(167, 157, 255, 0.6);
+    justify-content: space-between;
+    align-items: center;
+}
+
+p {
+    margin-left: 120px;
+}
+
+.fa-sign-out-alt:hover {
+    color: rgb(0, 209, 216);
+}
+
+#details {
+    font-weight: bold;
+    padding: 1em;
+}
+
+#details label {
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+    padding: 0.5em;
+    font-size: 1.2em;
+}
+
+.account-navigation {
+    background-color: rgb(26, 0, 170);
+    display: flex;
+    flex-wrap: wrap;
+    color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px rgba(106, 89, 255, 0.6);
+}
+
+[class*="-dropdown"] {
+    padding: 10px;
+    cursor: pointer;
+}
+
+[class*="-dropdown"]:hover {
+    background-color: rgb(36, 0, 243);
+}
+
+.savings-container {
+    margin: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.money-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: space-between;
+}
+
+.balance label {
+    display: inline;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.display-balance {
+    color: #010053;
+}
+
+table {
+    margin-top: 10px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+caption {
+    font-weight: bold;
+    font-size: 2em;
+    background-color: #0045a0;
+    padding: 5px;
+    color: rgb(255, 255, 255);
+}
+
+table,
+th,
+td {
+    font-size: 1em;
+    padding: 15px 60px;
+}
+
+td {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dfdfdf
+}
+
+tr>:nth-child(2) {
+    text-transform: capitalize;
+}
+
+th {
+    background-color: #3a69a7;
+    color: white;
+}
+
+tr>:nth-child(3)::before,
+.FixedDeposite-table tr>:nth-child(4)::before {
+    content: "₹ "
+}
+
+input {
+    width: 20em;
+    border-radius: 5px;
+    height: 2em;
+    font-size: 1em;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 2em 1em 0em;
+}
+
+input[type='button'] {
+    width: 6em;
+    height: 2.2em;
+    border: none;
+    margin: 10px auto 0px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(23, 127, 175);
+}
+
+[class^='errorMsg-'] {
+    margin-bottom: 3em;
+    margin-left: 1em;
+    color: rgb(255, 30, 30);
+}
+
+input[type='radio'] {
+    width: 1em;
+    height: 1em;
+    margin: 1em;
+}
+
+.deposite-container {
+    padding: 10px;
+    margin: 1em auto;
+}
+
+#plan-label {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.switch {
+    display: none;
+}
+
+.select {
+    background-color: rgb(36, 0, 243);
+}
