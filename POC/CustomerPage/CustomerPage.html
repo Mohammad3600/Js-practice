@@ -38,13 +38,11 @@
         <div class="money-container">
             <div class='credit-container'>
                 <input type="text" class='money' name='money' placeholder="Add Money to Savings Account">
-                <input type="button" class='addMoney' id='add' value="Add Money">
-                <div class="errorMsg-1"></div>
+                <input type="button" class='addMoney' value="Add Money" onclick="addMoney()">
             </div>
             <div class='debit-container'>
                 <input type="text" class='money-debit' name='money' placeholder="Debit Money from Savings Account">
-                <input type="button" class='addMoney' id='debit' value="debit Money">
-                <div class="errorMsg-2"></div>
+                <input type="button" class='addMoney' value="debit Money" onclick="debitMoney()">
             </div>
         </div>
         <div class="balance">
@@ -71,7 +69,6 @@
         </div>
         <input type="text" class='amount' name='money' placeholder="Add Amount to Fixed Deposit">
         <input type="button" class='addAmount' value="Add Plan" onclick="addAmount()">
-        <div class="errorMsg-3"></div>
         <table class='FixedDeposite-table'>
             <caption>Fixed-Deposit Plans</caption>
             <tr>
@@ -83,8 +80,7 @@
             </tr>
         </table>
     </div>
-    <script type="text/JavaScript" src="CustomerDetails.js" defer></script>
-    <script type="text/JavaScript" src="Calculations.js" defer></script>
+    <script type="text/JavaScript" src="CustomerDetails.js"></script>
 </body>
 
 </html>
