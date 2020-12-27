@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absolute</title>
+    <style>
+        html {
+            background-color: grey;
+        }
+        
+        header {
+            display: flex;
+            position: relative;
+            justify-content: flex-end;
+            height: 6vh;
+            background-color: blue;
+        }
+        
+        .bank {
+            position: absolute;
+            left: 700px;
+            top: 0;
+            /* left: 400px;
+            top: 0; */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="admin">Admin</div>
+        <div class="customer">Customer</div>
+        <div class="bank">ACS Bank</div>
+    </header>
+</body>
+
+</html>
