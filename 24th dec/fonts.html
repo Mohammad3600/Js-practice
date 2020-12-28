@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <title>Font-face</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        @font-face {
+            font-family: 'yellowtail';
+            src: url('Yellowtail-Regular.ttf');
+        }
+        
+        [class^='container-'] {
+            font-family: Montserrat;
+            margin: 10vh auto;
+            width: 30vw;
+        }
+        
+        .container-2 {
+            font-family: yellowtail;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-1">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore qui inventore harum quis obcaecati eveniet laborum, sint iusto repellat consectetur, dolorem vel, accusantium quod quam magnam quos beatae molestiae ipsam.
+    </div>
+    <div class="container-2">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore qui inventore harum quis obcaecati eveniet laborum, sint iusto repellat consectetur, dolorem vel, accusantium quod quam magnam quos beatae molestiae ipsam.
+    </div>
+</body>
+
+</html>
