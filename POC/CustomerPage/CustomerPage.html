@@ -37,12 +37,14 @@
     <div class="savings-container">
         <div class="money-container">
             <div class='credit-container'>
-                <input type="text" class='money' name='money' placeholder="Add Money to Savings Account">
-                <input type="button" class='addMoney' value="Add Money" onclick="addMoney()">
+                <input type="text" id='money' name='money' placeholder="Add Money to Savings Account">
+                <input type="button" class='addMoney' id='add' value="Add Money">
+                <div class="errorMsg-1"></div>
             </div>
             <div class='debit-container'>
-                <input type="text" class='money-debit' name='money' placeholder="Debit Money from Savings Account">
-                <input type="button" class='addMoney' value="debit Money" onclick="debitMoney()">
+                <input type="text" id='money-debit' name='money' placeholder="Debit Money from Savings Account">
+                <input type="button" class='addMoney' id='debit' value="debit Money">
+                <div class="errorMsg-2"></div>
             </div>
         </div>
         <div class="balance">
@@ -67,8 +69,9 @@
             <input type="radio" value="5" name='plan' id='plan2'>
             <label for="plan2">5 Years (6.5% Interest)</label>
         </div>
-        <input type="text" class='amount' name='money' placeholder="Add Amount to Fixed Deposit">
+        <input type="text" id='amount' name='money' placeholder="Add Amount to Fixed Deposit">
         <input type="button" class='addAmount' value="Add Plan" onclick="addAmount()">
+        <div class="errorMsg-3"></div>
         <table class='FixedDeposite-table'>
             <caption>Fixed-Deposit Plans</caption>
             <tr>
@@ -80,7 +83,8 @@
             </tr>
         </table>
     </div>
-    <script type="text/JavaScript" src="CustomerDetails.js"></script>
+    <script type="text/JavaScript" src="CustomerDetails.js" defer></script>
+    <script type="text/JavaScript" src="Calculations.js" defer></script>
 </body>
 
 </html>

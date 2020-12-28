@@ -4,8 +4,7 @@
 }
 
 body {
-    width: 100%;
-    height: 100%;
+    height: 100vh;
 }
 
 header {
@@ -18,13 +17,12 @@ header {
 }
 
 i {
-    font-size: 2em;
+    font-size: 2rem;
     padding-right: 10px;
 }
 
 .bank-title {
     display: flex;
-    flex-wrap: wrap;
     align-self: center;
     margin: 0px auto;
     padding-left: 150px;
@@ -38,7 +36,7 @@ nav {
 }
 
 [class^=nav-] {
-    padding: 1em;
+    padding: 1rem;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -76,10 +74,10 @@ nav {
 }
 
 input {
-    width: 22em;
+    width: 22rem;
     border-radius: 5px;
-    height: 2em;
-    font-size: 1em;
+    height: 2rem;
+    font-size: 1rem;
     font-family: 'Times New Roman', Times, serif;
 }
 
@@ -95,8 +93,21 @@ input:hover {
     border: none;
     margin: 20px auto 0px;
     font-size: 20px;
-    width: 10em;
-    height: 2em;
+    width: 10rem;
+    height: 2rem;
     color: rgb(255, 255, 255);
     background-color: rgb(23, 127, 175);
+}
+
+[type='submit']:hover {
+    background-color: rgb(7, 161, 233);
+}
+
+@media (max-width:576px) {
+    input {
+        width: 100%;
+    }
+    .bank-title {
+        padding: 0px;
+    }
 }
