@@ -1,76 +1,9 @@
-* {
-    margin: 0px;
-}
-
-i {
-    font-size: 2rem;
-}
-
-h1 {
-    font-size: 2rem;
-    display: inline-block;
-}
-
-body {
-    height: 100vh;
-}
-
-nav {
-    display: flex;
-    position: sticky;
-    top: 0;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    background-color: rgb(26, 0, 170);
-    padding: 15px 30px;
-    box-shadow: 5px 5px 5px rgba(167, 157, 255, 0.6);
-    justify-content: space-between;
-    align-items: center;
-}
-
-p {
-    margin-left: 7.5rem;
-}
-
-.fa-sign-out-alt:hover {
-    color: rgb(0, 209, 216);
-}
-
-#details {
-    font-weight: bold;
-    padding: 1rem;
-}
-
-#details label {
-    display: inline-block;
-    width: 18.5rem;
-    text-align: left;
-    padding: 0.5rem;
-    font-size: 1.2rem;
-}
-
-.account-navigation {
-    background-color: rgb(26, 0, 170);
-    display: flex;
-    flex-wrap: wrap;
-    color: rgb(255, 255, 255);
-    box-shadow: 5px 5px 5px rgba(106, 89, 255, 0.6);
-}
-
-[class*="-dropdown"] {
-    padding: 10px;
-    cursor: pointer;
-}
-
-[class*="-dropdown"]:hover {
-    background-color: rgb(36, 0, 243);
-}
-
 .savings-container {
     margin: 1rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    margin-bottom: 3.35rem;
 }
 
 .money-container {
@@ -90,43 +23,9 @@ p {
     color: #010053;
 }
 
-table {
-    margin-top: 10px;
-    width: 100%;
-    border-collapse: collapse;
-}
-
-caption {
-    font-weight: bold;
-    font-size: 2rem;
-    background-color: #0045a0;
-    padding: 5px;
-    color: rgb(255, 255, 255);
-}
-
-table,
-th,
-td {
-    font-size: 1rem;
-    padding: 15px 60px;
-}
-
-td {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-tr:nth-child(even) {
-    background-color: #dfdfdf
-}
-
 tr>:nth-child(2) {
     text-transform: capitalize;
-}
-
-th {
-    background-color: #3a69a7;
-    color: white;
+    text-align: center;
 }
 
 tr>:nth-child(3)::before,

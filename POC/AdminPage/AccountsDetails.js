@@ -106,14 +106,14 @@ document.querySelector('#Logout').onclick = function() {
     location.assign('../Login.html');
 }
 var loginId = sessionStorage.getItem('Admin-ID');
-var adminlist = JSON.parse(localStorage.getItem("admins"));
+var adminlist = JSON.parse(localStorage.getItem('admins'));
 var loginUser = adminlist.find(function(user) {
-    return user.id == loginId;
+    return user.email == loginId;
 });
 //filling the customer id,name
-document.querySelector('#id').innerHTML = ": " + loginUser.id;
-document.querySelector('#name').innerHTML = ": " + loginUser.name;
-var userslist = JSON.parse(localStorage.getItem("users"));
+document.querySelector('#id').innerHTML = ': ' + loginUser.email;
+document.querySelector('#name').innerHTML = ': ' + loginUser.name;
+var userslist = JSON.parse(localStorage.getItem('users'));
 //this function fils the all savings money and fixed deposit money
 (function() {
     var totalsavings = 0,
