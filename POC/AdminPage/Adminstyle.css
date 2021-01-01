@@ -40,18 +40,18 @@
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 6.7rem;
+    padding-bottom: 5.8rem;
 }
 
 table,
 th,
 td {
-    font-size: 0.9rem;
+    font-size: 1rem;
     padding: 12px 50px;
 }
 
 .savings-container {
-    padding-bottom: 3.2rem;
+    padding-bottom: 2.34rem;
 }
 
 .savings-container td,

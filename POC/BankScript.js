@@ -8,8 +8,8 @@ function checkDetails(event) {
     event.preventDefault();
     var userid = event.target.userid;
     var password = event.target.password;
-    var idError = document.querySelector('#idError');
-    var passwordError = document.querySelector('#passwordError');
+    var idError = document.getElementById('idError');
+    var passwordError = document.getElementById('passwordError');
     if (document.getElementsByName('id')[0].innerHTML == 'Customer ID') {
         if (userid.value === '') {
             idError.innerHTML = 'Please Fill Customer ID';
@@ -20,14 +20,7 @@ function checkDetails(event) {
             passwordError.innerHTML = 'Please Enter Password';
             return false;
         }
-        var user = listOfCustomers.find(function(list) {
-            return list.id == userid.value;
-        });
-        if (user && user.password === password.value) {
-            sessionStorage.setItem('Customer-ID', userid.value);
-            window.location.assign('CustomerPage/CustomerPage.html');
-            return true;
-        }
+        getUser(userid.value, password.value);
     } else {
         if (userid.value === '') {
             idError.innerHTML = 'Please Fill Admin Email';
@@ -38,80 +31,66 @@ function checkDetails(event) {
             passwordError.innerHTML = 'Please Enter Password';
             return false;
         }
-        var admin = adminList.find(function(list) {
-            return list.email == userid.value;
-        });
-        if (admin && admin.password === password.value) {
-            sessionStorage.setItem('Admin-ID', userid.value);
-            window.location.assign('AdminPage/AdminPage.html');
-            return true;
-        }
+        getAdmin(userid.value, password.value);
     }
-    passwordError.innerHTML = 'Invalid Id/Password';
 }
 
-//when #userid gets focus it Error message will bot be displayed
-document.querySelector('#userid').onfocus = function() {
-    document.querySelector('#idError').innerHTML = '';
+/**
+ * This function finds the user in firebase and password to login
+ * @param {string} id 
+ * @param {string} password 
+ */
+function getUser(id, password) {
+    database.collection('users').where('id', '==', id).get().then(function(snap) {
+        if (snap.docs.length) {
+            snap.docs.forEach(element => {
+                var user = element.data();
+                if (user.password == password) {
+                    database.collection('users').doc('loginuser').set(user).then(function() {
+                        window.location.assign('CustomerPage/CustomerPage.html');
+                    });
+                } else {
+                    document.getElementById('passwordError').innerHTML = 'Invalid Password';
+                }
+            });
+        } else {
+            document.getElementById('passwordError').innerHTML = 'Invalid Customer ID/Password';
+        }
+    });
+}
+
+/**
+ * This function finds the admin in firebase and password to login
+ * @param {string} email
+ * @param {string} password 
+ */
+function getAdmin(email, password) {
+    database.collection('admins').where('email', '==', email).get().then(function(snap) {
+        if (snap.docs.length) {
+            snap.docs.forEach(element => {
+                var admin = element.data();
+                if (admin.password == password) {
+                    database.collection('admins').doc('loginadmin').set(admin).then(function() {
+                        window.location.assign('AdminPage/AdminPage.html');
+                    });
+                } else {
+                    document.getElementById('passwordError').innerHTML = 'Invalid Password';
+                }
+            });
+        } else {
+            document.getElementById('passwordError').innerHTML = 'Invalid Customer ID/Password';
+        }
+    });
+}
+
+//when userid gets focus it Error message will bot be displayed
+document.getElementById('userid').onfocus = function() {
+    document.getElementById('idError').innerHTML = '';
 }
 
 //when #password gets focus it Error message will bot be displayed
-document.querySelector('#password').onfocus = function() {
-    document.querySelector('#passwordError').innerHTML = '';
-}
-
-/**
- * Customer constructor will return a object
- * @param {number} id 
- * @param {string} username 
- * @param {string} password 
- * @param {number} balance 
- * @param {object} transactions 
- * @param {object} fixedDeposites 
- */
-function Customers(id, username, password, balance, transactions, fixedDeposites) {
-    this.id = id;
-    this.username = username;
-    this.password = password;
-    this.balance = balance;
-    this.transactions = transactions;
-    this.fixedDeposites = fixedDeposites;
-}
-
-/**
- * This consructor return a Transaction object
- * @param {string} amount 
- * @param {string} date 
- * @param {string} type 
- */
-function Transactions(amount, date, type) {
-    this.date = date;
-    this.type = type;
-    this.amount = amount;
-}
-
-/**
- * This consructor return a FixedDeposites object
- * @param {string} type 
- * @param {string} amount 
- * @param {string} valueDate 
- */
-function FixedDeposites(type, amount, valueDate) {
-    this.valueDate = valueDate;
-    this.type = type;
-    this.amount = amount;
-}
-
-/**
- * This constructor returns a Admin object
- * @param {number} idemail 
- * @param {string} name 
- * @param {string} password 
- */
-function Admin(email, name, password) {
-    this.email = email;
-    this.name = name;
-    this.password = password;
+document.getElementById('password').onfocus = function() {
+    document.getElementById('passwordError').innerHTML = '';
 }
 
 //changing from one to another navigation bars
@@ -119,42 +98,89 @@ document.querySelector('.nav-1').onclick = function() {
     this.classList.add('navigation');
     this.nextElementSibling.classList.remove('navigation');
     document.getElementsByName('id')[0].innerHTML = 'Admin Email';
-    document.querySelector('#idError').innerHTML = '';
-    document.querySelector('#passwordError').innerHTML = '';
+    document.getElementById('idError').innerHTML = '';
+    document.getElementById('passwordError').innerHTML = '';
 }
 document.querySelector('.nav-2').onclick = function() {
     this.classList.add('navigation');
     document.querySelector('.nav-1').classList.remove('navigation');
     document.getElementsByName('id')[0].innerHTML = 'Customer ID';
-    document.querySelector('#idError').innerHTML = '';
-    document.querySelector('#passwordError').innerHTML = '';
+    document.getElementById('idError').innerHTML = '';
+    document.getElementById('passwordError').innerHTML = '';
 }
 
 //onsubmit checkDetails function will called
 document.forms.UserForm.onsubmit = checkDetails;
-//creating Array of Transactions obejcts
-var transactions1 = [new Transactions('1,000', ('11/11/2020'), 'debited'), new Transactions('3,000', ('11/11/2020'), 'debited'), new Transactions('1,100', ('24/12/2020'), 'debited')];
-var transactions2 = [new Transactions('2,000', ('15/12/2020'), 'debited'), new Transactions('5,000', ('21/12/2020'), 'debited')];
-var transactions3 = [new Transactions('1,500', ('1/11/2020'), 'debited'), new Transactions('2,000', ('12/11/2020'), 'debited')];
-var transactions4 = [new Transactions('3,000', ('29/8/2020'), 'debited'), new Transactions('3,000', ('14/10/2020'), 'debited')];
-var transactions5 = [new Transactions('4,500', ('23/9/2020'), 'debited'), new Transactions('1,000', ('20/10/2020'), 'debited')];
-//creating Array of FixedDeposites obejcts
-var fixedDepositeList1 = [new FixedDeposites('1 Year', '5,000', '10/12/2020'), new FixedDeposites('5 Years', '1,00,000', '20/12/2020')];
-var fixedDepositeList2 = [new FixedDeposites('1 Year', '6,000', '10/12/2020'), new FixedDeposites('5 Years', '50,000', '20/12/2020')];
-var fixedDepositeList3 = [new FixedDeposites('1 Year', '7,000', '10/12/2020'), new FixedDeposites('5 Years', '1,10,000', '20/12/2020')];
-var fixedDepositeList4 = [new FixedDeposites('1 Year', '5,500', '10/12/2020'), new FixedDeposites('5 Years', '1,20,000', '20/12/2020')];
-var fixedDepositeList5 = [new FixedDeposites('1 Year', '6,500', '10/12/2020'), new FixedDeposites('5 Years', '1,00,000', '20/12/2020')];
-//creating Array of Customers obejcts
-var user1 = new Customers(12345671, 'Mohammad Vempalli', 'Mohammad*', 21000, transactions1, fixedDepositeList1);
-var user2 = new Customers(12345672, 'Saketh Kota', 'Saketh*', 30000, transactions2, fixedDepositeList2);
-var user3 = new Customers(12345673, 'Akhil karankoti', 'Akhil*', 25000, transactions3, fixedDepositeList3);
-var user4 = new Customers(12345674, 'Nikhil Chitineni', 'Nikhil*', 30000, transactions4, fixedDepositeList4);
-var user5 = new Customers(12345675, 'Bharath Guntaka', 'Bharath*', 40000, transactions5, fixedDepositeList5);
-var listOfCustomers = [user1, user2, user3, user4, user5];
-//creating Array of Admins
-var adminList = [new Admin('vasu@gmail.com', 'Vasudevan', 'Admin1*'), new Admin('tavish@gmail.com', 'Tavish', 'Admin2*'), new Admin('jagadish@gmail.com', 'Jagadish', 'Admin3*')];
-localStorage.setItem('admins', JSON.stringify(adminList));
-//If users key not availabel in local storage then we are added this users
-if (!(localStorage.getItem('users'))) {
-    localStorage.setItem('users', JSON.stringify(listOfCustomers));
-}
+//user1 data
+var usertrans1 = [{ date: "11/11/2020", type: "debited", amount: "1,000" },
+    { date: "11/11/2020", type: "debited", amount: "3,000" },
+    { date: "24/12/2020", type: "debited", amount: "1,100" }
+];
+var userdeposits1 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '10,000' }, { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }];
+var user1 = { id: '12345671', username: 'Mohammad', password: 'Mohammad123*', balance: 21000, transactions: usertrans1, fixedDeposites: userdeposits1 };
+
+//user2 data
+var usertrans2 = [{ date: "11/11/2020", type: "debited", amount: "2,000" },
+    { date: "11/11/2020", type: "debited", amount: "4,000" },
+    { date: "24/12/2020", type: "credited", amount: "5,100" }
+];
+var userdeposits2 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '50,000' },
+    { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }
+];
+var user2 = { id: '12345672', username: 'Saketh', password: 'Saketh123*', balance: 30000, transactions: usertrans2, fixedDeposites: userdeposits2 };
+
+//user3 data
+var usertrans3 = [{ date: "11/11/2020", type: "debited", amount: "2,000" },
+    { date: "11/11/2020", type: "debited", amount: "4,000" },
+    { date: "24/12/2020", type: "credited", amount: "5,100" }
+];
+var userdeposits3 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '50,000' },
+    { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }
+];
+var user3 = { id: '12345673', username: 'Akhil', password: 'Akhil123*', balance: 50000, transactions: usertrans3, fixedDeposites: userdeposits3 };
+
+//user4 data
+var usertrans4 = [{ date: "11/11/2020", type: "debited", amount: "2,000" },
+    { date: "11/11/2020", type: "debited", amount: "4,000" },
+    { date: "24/12/2020", type: "credited", amount: "5,100" }
+];
+var userdeposits4 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '50,000' },
+    { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }
+];
+var user4 = { id: '12345674', username: 'Nikhil', password: 'Nikhil123*', balance: 60000, transactions: usertrans4, fixedDeposites: userdeposits4 };
+
+//user5 data
+var usertrans5 = [{ date: "11/11/2020", type: "debited", amount: "2,000" },
+    { date: "11/11/2020", type: "debited", amount: "4,000" },
+    { date: "24/12/2020", type: "credited", amount: "5,100" }
+];
+var userdeposits5 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '50,000' },
+    { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }
+];
+var user5 = { id: '12345675', username: 'Bharath', password: 'Bharath123*', balance: 40000, transactions: usertrans5, fixedDeposites: userdeposits5 };
+
+//adding users data to firebase
+database.collection('users').get().then(function(snap) {
+    if (!snap.docs.length) {
+        database.collection('users').doc('user1').set(user1);
+        database.collection('users').doc('user2').set(user2);
+        database.collection('users').doc('user3').set(user3);
+        database.collection('users').doc('user4').set(user4);
+        database.collection('users').doc('user5').set(user5);
+    }
+});
+
+//admin1
+var admin1 = { name: 'Vasudevan Dandey', email: 'vasu@gmail.com', password: 'Vasu123*' };
+var admin2 = { name: 'Tavish Agarwal', email: 'tavish@gmail.com', password: 'Tavish123*' };
+var admin3 = { name: 'Jagadish', email: 'jagadish@gmail.com', password: 'Jagadish123*' };
+var admin4 = { name: 'Chaitanya', email: 'chaitanya@gmail.com', password: 'Chaitanya123*' };
+//adding admin data to firebase
+database.collection('admins').get().then(function(snap) {
+    if (!snap.docs.length) {
+        database.collection('admins').doc('admin1').set(admin1);
+        database.collection('admins').doc('admin2').set(admin2);
+        database.collection('admins').doc('admin3').set(admin3);
+        database.collection('admins').doc('admin4').set(admin4);
+    }
+});

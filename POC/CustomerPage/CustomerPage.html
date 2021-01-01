@@ -7,6 +7,8 @@
     <script src="https://kit.fontawesome.com/84c7f42d8e.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <link rel="stylesheet" href="../commonstyles.css">
     <link rel="stylesheet" href="Customerstyle.css">
     <title>Customer Page</title>
@@ -20,9 +22,13 @@
             <p>Your trust is our investment</p>
         </div>
         <div class="nav-content">
-            <i class="fas fa-sign-out-alt" title="Logout" id="Logout"></i>
+            <i class="far fa-user-circle" title="Profile"></i>
         </div>
     </nav>
+    <div class='switch profile'>
+        <a href="javascript:void(0)" id='Change'>Change Password</a>
+        <a href="javascript:void(0)" id='Logout'>Logout</a>
+    </div>
     <Header id="details">
         <div class="customer-Id">
             <label>Customer Id</label>
@@ -59,7 +65,7 @@
             <caption>Transactions-List</caption>
             <tr>
                 <th>Date</th>
-                <th>Transaction Date</th>
+                <th>Transaction Type</th>
                 <th>Amount</th>
             </tr>
         </table>
@@ -89,7 +95,8 @@
     <footer>
         ©2020 American Cybersystems, Inc. All Rights Reserved
     </footer>
-    <script type="text/JavaScript" src="Calculations.js"></script>
+    <script type="text/JavaScript" src="../Firebase-Config.js"></script>
+    <script type="text/JavaScript" src="Utilities.js"></script>
     <script type="text/JavaScript" src="CustomerDetails.js"></script>
 </body>
 

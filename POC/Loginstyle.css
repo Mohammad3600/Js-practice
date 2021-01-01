@@ -12,31 +12,31 @@ body {
 }
 
 p {
-    margin-left: 8rem;
+    margin-left: 7.5rem;
 }
 
 header {
     display: flex;
-    justify-content: flex-end;
     flex-wrap: wrap;
+    position: sticky;
+    top: 0;
     color: rgb(255, 255, 255);
+    font-weight: bold;
     background-color: rgb(26, 0, 170);
-    /* background: linear-gradient(90deg, rgba(0, 19, 121, 1) 0%, rgba(11, 0, 149, 1) 51%, rgba(27, 21, 156, 0.8519782913165266) 100%); */
+    background: linear-gradient(90deg, rgba(0, 19, 121, 1) 0%, rgba(11, 0, 149, 1) 51%, rgba(27, 21, 156, 0.8519782913165266) 100%);
+    padding: 0px 30px;
     box-shadow: 5px 5px 5px rgba(167, 157, 255, 0.6);
+    justify-content: space-between;
+    align-items: center;
 }
 
 i {
+    font-size: 2.2em;
+}
+
+h1 {
     font-size: 2rem;
-    padding-right: 10px;
-}
-
-.bank-title {
-    margin: 0px auto;
-    padding-left: 150px;
-}
-
-.bank-title h1 {
-    display: inline;
+    display: inline-block;
 }
 
 nav {
@@ -46,7 +46,8 @@ nav {
     font-weight: bold;
 }
 
-[class^=nav-] {
+[class^=nav-],
+.content {
     padding: 1rem;
     border-radius: 5px;
     cursor: pointer;
@@ -60,24 +61,29 @@ nav {
     background-color: rgb(38, 0, 255)
 }
 
-.Login-container h1 {
+[class*='-container'] h1 {
     font-size: 2.5rem;
     color: rgb(0, 67, 105);
     text-align: center;
-    margin: 40px;
+    margin: 20px;
 }
 
-[id$='Error'] {
+[id*='Error'] {
     color: rgb(255, 0, 0);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .Login-container,
+.success-container,
 .UserForm {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    margin: auto;
+    margin: 0 auto;
+}
+
+.success-container {
+    align-items: center;
 }
 
 .Login-container {
@@ -91,15 +97,20 @@ input {
     font-size: 1rem;
 }
 
-input:focus {
-    border: 1px solid rgba(25, 0, 255, 0.664);
+.switch {
+    display: none;
+}
+
+.success-container i {
+    color: rgb(0, 165, 0);
 }
 
 input:hover {
-    border: 2px solid rgba(25, 0, 255, 0.664);
+    border: 1px solid rgba(25, 0, 255, 0.664);
 }
 
-[type='submit'] {
+[type='submit'],
+[type='button'] {
     border: none;
     margin: 20px auto 0px;
     font-size: 1.2rem;
@@ -109,7 +120,8 @@ input:hover {
     background-color: rgb(23, 127, 175);
 }
 
-[type='submit']:hover {
+[type='submit']:hover,
+[type='button']:hover {
     background-color: rgb(7, 161, 233);
 }
 

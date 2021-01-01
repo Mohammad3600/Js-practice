@@ -1,11 +1,26 @@
-var loginId = sessionStorage.getItem('Customer-ID');
-var userslist = JSON.parse(localStorage.getItem('users'));
-// Below array method find login user index in userlist
-var userindex = userslist.findIndex(function(user) {
-    return user.id == loginId;
+var loginUser;
+
+//This will fetch login user and fill tables in page
+database.collection('users').doc('loginuser').get().then(function(data) {
+    loginUser = data.data();
+    //writing the user id,name in html page
+    document.getElementById('id').innerHTML = ': ' + loginUser.id;
+    document.getElementById('name').innerHTML = ': ' + loginUser.username;
+    //the below functions called every time when page reloaded, and this will be fill balance, transaction and deposits tables
+    fillBalance(loginUser.balance);
+    fillTransactionTable();
+    fillFixedDepositePlans();
 });
-//finding login user in userslist
-var loginUser = userslist[userindex];
+
+/**
+ * This will update loginuser details in firebase
+ * @param {object} snapshot 
+ */
+function updateUser(snapshot) {
+    snapshot.docs.forEach(function(doc) {
+        database.collection('users').doc(doc.id).set(loginUser);
+    });
+}
 
 /**
  * This function called by #add button to add money in the savings account and append a transaction
@@ -14,8 +29,9 @@ var loginUser = userslist[userindex];
  * and changing that object in userlist.
  */
 function addMoney() {
-    var getMoney = document.querySelector('#money').value;
-    document.querySelector('#money').value = '';
+    var getMoney = document.getElementById('money').value;
+    document.getElementById('money').value = '';
+    values.money = '';
     if (getMoney === '') {
         document.querySelector('.errorMsg-1').innerHTML = 'Please Enter Amount';
     } else if (!(/^\d{0,15}$/.test(getMoney))) {
@@ -24,8 +40,7 @@ function addMoney() {
         var transaction = { date: new Date().toLocaleDateString(), type: 'credited', amount: currencyFormat(getMoney) };
         loginUser.transactions.unshift(transaction);
         loginUser.balance += parseInt(getMoney);
-        userslist[userindex] = loginUser;
-        localStorage.setItem('users', JSON.stringify(userslist));
+        database.collection('users').where('id', '==', loginUser.id).get().then(updateUser);
         addTransaction(transaction, '.Transaction-table');
         fillBalance(loginUser.balance);
     }
@@ -40,10 +55,7 @@ function addTransaction(transaction, tableclassName) {
     var table = document.querySelector(tableclassName);
     var tr = document.createElement('tr');
     for (value in transaction) {
-        var td = document.createElement('td');
-        var textValue = document.createTextNode(transaction[value]);
-        td.appendChild(textValue);
-        tr.appendChild(td);
+        tr.appendChild(createTdata(transaction[value]));
     }
     if (tableclassName === '.FixedDeposite-table') {
         tr.appendChild(calculateEstimatedAmount(transaction));
@@ -57,8 +69,9 @@ function addTransaction(transaction, tableclassName) {
  * This function will debit the entered money in user's balance and added a transaction in users transactions
  */
 function debitMoney() {
-    var getMoney = document.querySelector('#money-debit').value;
-    document.querySelector('#money-debit').value = '';
+    var getMoney = document.getElementById('money-debit').value;
+    values['money-debit'] = '';
+    document.getElementById('money-debit').value = '';
     if (getMoney === '') {
         document.querySelector('.errorMsg-2').innerHTML = 'Please Enter Amount';
     } else if (!(/^\d{0,15}$/.test(getMoney))) {
@@ -69,8 +82,7 @@ function debitMoney() {
         var transaction = { date: new Date().toLocaleDateString(), type: 'debited', amount: currencyFormat(getMoney) };
         loginUser.transactions.unshift(transaction);
         loginUser.balance -= parseInt(getMoney);
-        userslist[userindex] = loginUser;
-        localStorage.setItem('users', JSON.stringify(userslist));
+        database.collection('users').where('id', '==', loginUser.id).get().then(updateUser);
         addTransaction(transaction, '.Transaction-table');
         fillBalance(loginUser.balance);
     }
@@ -84,12 +96,9 @@ function fillTransactionTable() {
     var transactions = loginUser.transactions;
     for (transaction of transactions) {
         var tr = document.createElement('tr');
-        for (value in transaction) {
-            var td = document.createElement('td');
-            var textValue = document.createTextNode(transaction[value]);
-            td.appendChild(textValue);
-            tr.appendChild(td);
-        }
+        tr.appendChild(createTdata(transaction.date));
+        tr.appendChild(createTdata(transaction.type));
+        tr.appendChild(createTdata(transaction.amount));
         table.appendChild(tr);
     }
 }
@@ -100,8 +109,8 @@ function fillTransactionTable() {
  * and we are adding the object to user's fixedDeposites list then we are changing the localStorage
  */
 function addAmount() {
-    var getAmount = document.querySelector('#amount').value;
-    document.querySelector('#amount').value = '';
+    var getAmount = document.getElementById('amount').value;
+    document.getElementById('amount').value = '';
     if (getAmount === '') {
         document.querySelector('.errorMsg-3').innerHTML = 'Please Enter Amount';
     } else if (!(/^\d{0,15}$/.test(getAmount))) {
@@ -113,8 +122,7 @@ function addAmount() {
         var plantype = (checked.value == 1) ? '1 Year' : '5 Years';
         var deposite = { valueDate: new Date().toLocaleDateString(), type: plantype, amount: currencyFormat(getAmount) };
         loginUser.fixedDeposites.unshift(deposite);
-        userslist[userindex] = loginUser;
-        localStorage.setItem('users', JSON.stringify(userslist));
+        database.collection('users').where('id', '==', loginUser.id).get().then(updateUser);
         addTransaction(deposite, '.FixedDeposite-table');
     }
 }
@@ -127,12 +135,9 @@ function fillFixedDepositePlans() {
     var deposites = loginUser.fixedDeposites;
     for (deposite of deposites) {
         var tr = document.createElement('tr');
-        for (value in deposite) {
-            var td = document.createElement('td');
-            var textValue = document.createTextNode(deposite[value]);
-            td.appendChild(textValue);
-            tr.appendChild(td);
-        }
+        tr.appendChild(createTdata(deposite.valueDate));
+        tr.appendChild(createTdata(deposite.type));
+        tr.appendChild(createTdata(deposite.amount));
         tr.appendChild(calculateEstimatedAmount(deposite));
         tr.appendChild(calculateMaturityDate(deposite));
         table.appendChild(tr);
@@ -181,35 +186,53 @@ function switchtoDeposits() {
  * this afunction will remove the customer-d in sessionStorage and redirect to login page
  */
 function logout() {
-    sessionStorage.removeItem('Customer-ID');
-    location.assign('../Login.html');
+    database.collection('users').doc('loginuser').delete().then(function() {
+        location.assign('../Login.html');
+    });
 }
 
 //ongetting focus on #money, Error message no longer displayed
-document.querySelector('#money').onfocus = function() {
+document.getElementById('money').onfocus = function() {
     document.querySelector('.errorMsg-1').innerHTML = '';
 }
 
 //ongetting focus on #money-debit,Error message no longer displayed
-document.querySelector('#money-debit').onfocus = function() {
+document.getElementById('money-debit').onfocus = function() {
     document.querySelector('.errorMsg-2').innerHTML = '';
 }
 
 //ongetting focus on #amount, Error message no longer displayed
-document.querySelector('#amount').onfocus = function() {
+document.getElementById('amount').onfocus = function() {
     document.querySelector('.errorMsg-3').innerHTML = '';
 }
 
+//This will display profile when onclick on the profile icon 
+document.querySelector('.far').onclick = function() {
+    var profile = document.querySelector('.profile');
+    if (profile.classList.contains('switch')) {
+        profile.classList.remove('switch');
+    } else {
+        profile.classList.add('switch');
+    }
+}
+
+//This will redirect to change password page
+document.getElementById('Change').onclick = function(event) {
+    document.getElementById('Change').href = '../Changepassword.html?user';
+    console.log(document.getElementById('Change'));
+    document.getElementById('Change').click();
+}
+
 // When user clicks on #add element then addMoney function will called
-document.querySelector('#add').onclick = addMoney;
+document.getElementById('add').onclick = addMoney;
 // When user clicks on #debit element then debitMoney function will called
-document.querySelector('#debit').onclick = debitMoney;
+document.getElementById('debit').onclick = debitMoney;
 //when user's clicks on .saving-dropdown then switchtoSavings function will called
 document.querySelector('.savings-dropdown').onclick = switchtoSavings;
 //when user's clicks on .Deposite-dropdown then switchtoDeposits function will called
 document.querySelector('.Deposite-dropdown').onclick = switchtoDeposits;
 //below function takes user to login page and clear the customer-id in sessionStorage
-document.querySelector('#Logout').onclick = logout;
+document.getElementById('Logout').onclick = logout;
 //below object has keys as textbox id's so that we can change the textbox values based on its id.
 var values = { money: '', 'money-debit': '', amount: '' };
 /**
@@ -237,10 +260,3 @@ document.querySelector('#money-debit').addEventListener('keydown', keydown);
 document.querySelector('#money-debit').addEventListener('keyup', keyup);
 document.querySelector('#amount').addEventListener('keydown', keydown);
 document.querySelector('#amount').addEventListener('keyup', keyup);
-//writing the user id,name in html page
-document.querySelector('#id').innerHTML = ': ' + loginUser.id;
-document.querySelector('#name').innerHTML = ': ' + loginUser.username;
-//the below functions called every time when page reloaded, and this will be fill balance, transaction and deposits tables
-fillBalance(loginUser.balance);
-fillTransactionTable();
-fillFixedDepositePlans();
