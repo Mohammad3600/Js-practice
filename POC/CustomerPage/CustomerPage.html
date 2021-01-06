@@ -26,8 +26,10 @@
         </div>
     </nav>
     <div class='switch profile'>
-        <a href="javascript:void(0)" id='Change'>Change Password</a>
-        <a href="javascript:void(0)" id='Logout'>Logout</a>
+        <a href="javascript:void(0)" id='Change'>
+            <i class="fas fa-user-lock"></i> Change Password</a>
+        <a href="javascript:void(0)" id='Logout'>
+            <i class="fas fa-sign-out-alt"></i>Logout</a>
     </div>
     <Header id="details">
         <div class="customer-Id">
@@ -79,12 +81,13 @@
             <label for="plan2">5 Years (6.5% Interest)</label>
         </div>
         <input type="text" id="amount" name="money" placeholder="Add Amount to Fixed Deposit">
-        <input type="button" class="addAmount" value="Add Plan" onclick="addAmount()">
+        <label>(Minimum amount is ₹ 5,000)</label>
         <div class="errorMsg-3"></div>
+        <input type="button" class="addAmount" value="Add Plan" onclick="addAmount()">
         <table class="FixedDeposite-table">
             <caption>Fixed-Deposit Plans</caption>
             <tr>
-                <th>Value Date</th>
+                <th>Date</th>
                 <th>Plan Type</th>
                 <th>Amount</th>
                 <th>Estimated Amount</th>

@@ -10,7 +10,7 @@ function checkDetails(event) {
     var password = event.target.password;
     var idError = document.getElementById('idError');
     var passwordError = document.getElementById('passwordError');
-    if (document.getElementsByName('id')[0].innerHTML == 'Customer ID') {
+    if (document.getElementsByName('id')[0].innerHTML === 'Customer ID') {
         if (userid.value === '') {
             idError.innerHTML = 'Please Fill Customer ID';
         } else if (!(/\d{8}/.test(userid.value))) {
@@ -43,16 +43,14 @@ function checkDetails(event) {
 function getUser(id, password) {
     database.collection('users').where('id', '==', id).get().then(function(snap) {
         if (snap.docs.length) {
-            snap.docs.forEach(element => {
-                var user = element.data();
-                if (user.password == password) {
-                    database.collection('users').doc('loginuser').set(user).then(function() {
-                        window.location.assign('CustomerPage/CustomerPage.html');
-                    });
-                } else {
-                    document.getElementById('passwordError').innerHTML = 'Invalid Password';
-                }
-            });
+            var user = snap.docs[0].data();
+            if (user.password == password) {
+                database.collection('users').doc('loginId').set({ loginId: user.id }).then(function() {
+                    window.location.assign('CustomerPage/CustomerPage.html');
+                });
+            } else {
+                document.getElementById('passwordError').innerHTML = 'Invalid Password';
+            }
         } else {
             document.getElementById('passwordError').innerHTML = 'Invalid Customer ID/Password';
         }
@@ -67,16 +65,14 @@ function getUser(id, password) {
 function getAdmin(email, password) {
     database.collection('admins').where('email', '==', email).get().then(function(snap) {
         if (snap.docs.length) {
-            snap.docs.forEach(element => {
-                var admin = element.data();
-                if (admin.password == password) {
-                    database.collection('admins').doc('loginadmin').set(admin).then(function() {
-                        window.location.assign('AdminPage/AdminPage.html');
-                    });
-                } else {
-                    document.getElementById('passwordError').innerHTML = 'Invalid Password';
-                }
-            });
+            var admin = snap.docs[0].data();
+            if (admin.password == password) {
+                database.collection('admins').doc('loginEmail').set({ loginEmail: admin.email }).then(function() {
+                    window.location.assign('AdminPage/AdminPage.html');
+                });
+            } else {
+                document.getElementById('passwordError').innerHTML = 'Invalid Password';
+            }
         } else {
             document.getElementById('passwordError').innerHTML = 'Invalid Customer ID/Password';
         }
@@ -112,61 +108,47 @@ document.querySelector('.nav-2').onclick = function() {
 //onsubmit checkDetails function will called
 document.forms.UserForm.onsubmit = checkDetails;
 //user1 data
-var usertrans1 = [{ date: "11/11/2020", type: "debited", amount: "1,000" },
-    { date: "11/11/2020", type: "debited", amount: "3,000" },
-    { date: "24/12/2020", type: "debited", amount: "1,100" }
-];
-var userdeposits1 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '10,000' }, { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }];
+var usertrans1 = { credited: [{ date: "11-11-2020", amount: 1000 }, { date: "11-11-2020", amount: 3100 }], debited: [{ date: "24-12-2020", amount: 1100 }] };
+var userdeposits1 = [{ date: '10-12-2020', type: '1 Year', amount: 10000 }, { date: '10-12-2020', type: '5 Year', amount: 1000000 }];
 var user1 = { id: '12345671', username: 'Mohammad', password: 'Mohammad123*', balance: 21000, transactions: usertrans1, fixedDeposites: userdeposits1 };
 
+
 //user2 data
-var usertrans2 = [{ date: "11/11/2020", type: "debited", amount: "2,000" },
-    { date: "11/11/2020", type: "debited", amount: "4,000" },
-    { date: "24/12/2020", type: "credited", amount: "5,100" }
-];
-var userdeposits2 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '50,000' },
-    { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }
+var usertrans2 = { credited: [{ date: "11-11-2020", amount: 4000 }, { date: "11-11-2020", amount: 5100 }], debited: [{ date: "24-12-2020", amount: 1100 }] };
+var userdeposits2 = [{ date: '10-12-2020', type: '1 Year', amount: 50000 },
+    { date: '10-12-2020', type: '5 Year', amount: 10000 }
 ];
 var user2 = { id: '12345672', username: 'Saketh', password: 'Saketh123*', balance: 30000, transactions: usertrans2, fixedDeposites: userdeposits2 };
 
 //user3 data
-var usertrans3 = [{ date: "11/11/2020", type: "debited", amount: "2,000" },
-    { date: "11/11/2020", type: "debited", amount: "4,000" },
-    { date: "24/12/2020", type: "credited", amount: "5,100" }
-];
-var userdeposits3 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '50,000' },
-    { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }
+var usertrans3 = { credited: [{ date: "11-11-2020", amount: 1000 }, { date: "11-11-2020", amount: 3100 }], debited: [{ date: "24-12-2020", amount: 1100 }] };
+var userdeposits3 = [{ date: '10-12-2020', type: '1 Year', amount: 50000 },
+    { date: '10-12-2020', type: '5 Year', amount: 10000 }
 ];
 var user3 = { id: '12345673', username: 'Akhil', password: 'Akhil123*', balance: 50000, transactions: usertrans3, fixedDeposites: userdeposits3 };
 
 //user4 data
-var usertrans4 = [{ date: "11/11/2020", type: "debited", amount: "2,000" },
-    { date: "11/11/2020", type: "debited", amount: "4,000" },
-    { date: "24/12/2020", type: "credited", amount: "5,100" }
-];
-var userdeposits4 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '50,000' },
-    { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }
+var usertrans4 = { credited: [{ date: "11-11-2020", amount: 1000 }, { date: "11-11-2020", amount: 3100 }], debited: [{ date: "24-12-2020", amount: 1100 }] };
+var userdeposits4 = [{ date: '10-12-2020', type: '1 Year', amount: 50000 },
+    { date: '10-12-2020', type: '5 Year', amount: 10000 }
 ];
 var user4 = { id: '12345674', username: 'Nikhil', password: 'Nikhil123*', balance: 60000, transactions: usertrans4, fixedDeposites: userdeposits4 };
 
 //user5 data
-var usertrans5 = [{ date: "11/11/2020", type: "debited", amount: "2,000" },
-    { date: "11/11/2020", type: "debited", amount: "4,000" },
-    { date: "24/12/2020", type: "credited", amount: "5,100" }
-];
-var userdeposits5 = [{ valueDate: '10/12/2020', type: '1 Year', amount: '50,000' },
-    { valueDate: '10/12/2020', type: '5 Year', amount: '10,0000' }
+var usertrans5 = { credited: [{ date: "11-11-2020", amount: 1000 }, { date: "11-11-2020", amount: 3100 }], debited: [{ date: "24-12-2020", amount: 1100 }] };
+var userdeposits5 = [{ date: '10-12-2020', type: '1 Year', amount: 50000 },
+    { date: '10-12-2020', type: '5 Year', amount: 10000 }
 ];
 var user5 = { id: '12345675', username: 'Bharath', password: 'Bharath123*', balance: 40000, transactions: usertrans5, fixedDeposites: userdeposits5 };
 
 //adding users data to firebase
 database.collection('users').get().then(function(snap) {
     if (!snap.docs.length) {
-        database.collection('users').doc('user1').set(user1);
-        database.collection('users').doc('user2').set(user2);
-        database.collection('users').doc('user3').set(user3);
-        database.collection('users').doc('user4').set(user4);
-        database.collection('users').doc('user5').set(user5);
+        database.collection('users').add(user1);
+        database.collection('users').add(user2);
+        database.collection('users').add(user3);
+        database.collection('users').add(user4);
+        database.collection('users').add(user5);
     }
 });
 
@@ -178,9 +160,9 @@ var admin4 = { name: 'Chaitanya', email: 'chaitanya@gmail.com', password: 'Chait
 //adding admin data to firebase
 database.collection('admins').get().then(function(snap) {
     if (!snap.docs.length) {
-        database.collection('admins').doc('admin1').set(admin1);
-        database.collection('admins').doc('admin2').set(admin2);
-        database.collection('admins').doc('admin3').set(admin3);
-        database.collection('admins').doc('admin4').set(admin4);
+        database.collection('admins').add(admin1);
+        database.collection('admins').add(admin2);
+        database.collection('admins').add(admin3);
+        database.collection('admins').add(admin4);
     }
 });

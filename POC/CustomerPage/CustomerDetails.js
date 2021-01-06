@@ -1,15 +1,18 @@
 var loginUser;
 
 //This will fetch login user and fill tables in page
-database.collection('users').doc('loginuser').get().then(function(data) {
-    loginUser = data.data();
-    //writing the user id,name in html page
-    document.getElementById('id').innerHTML = ': ' + loginUser.id;
-    document.getElementById('name').innerHTML = ': ' + loginUser.username;
-    //the below functions called every time when page reloaded, and this will be fill balance, transaction and deposits tables
-    fillBalance(loginUser.balance);
-    fillTransactionTable();
-    fillFixedDepositePlans();
+database.collection('users').doc('loginId').get().then(function(data) {
+    var login = data.data();
+    database.collection('users').where('id', '==', login.loginId).get().then(function(snap) {
+        loginUser = snap.docs[0].data();
+        //writing the user id,name in html page
+        document.getElementById('id').innerHTML = ': ' + loginUser.id;
+        document.getElementById('name').innerHTML = ': ' + loginUser.username;
+        //the below functions called every time when page reloaded, and this will be fill balance, transaction and deposits tables
+        fillBalance(loginUser.balance);
+        fillTransactionTable();
+        fillFixedDepositePlans();
+    });
 });
 
 /**
@@ -37,8 +40,9 @@ function addMoney() {
     } else if (!(/^\d{0,15}$/.test(getMoney))) {
         document.querySelector('.errorMsg-1').innerHTML = 'Please Enter Valid Amount';
     } else {
-        var transaction = { date: new Date().toLocaleDateString(), type: 'credited', amount: currencyFormat(getMoney) };
-        loginUser.transactions.unshift(transaction);
+        var transaction = { date: dateFormat(new Date().toLocaleDateString()), amount: parseInt(getMoney) };
+        loginUser.transactions.credited.unshift(transaction);
+        transaction = { date: dateFormat(new Date().toLocaleDateString()), type: 'credited', amount: currencyFormat(getMoney) };
         loginUser.balance += parseInt(getMoney);
         database.collection('users').where('id', '==', loginUser.id).get().then(updateUser);
         addTransaction(transaction, '.Transaction-table');
@@ -79,8 +83,9 @@ function debitMoney() {
     } else if (loginUser.balance < parseInt(getMoney)) {
         document.querySelector('.errorMsg-2').innerHTML = 'Not Enough Balance';
     } else {
-        var transaction = { date: new Date().toLocaleDateString(), type: 'debited', amount: currencyFormat(getMoney) };
-        loginUser.transactions.unshift(transaction);
+        var transaction = { date: dateFormat(new Date().toLocaleDateString()), amount: parseInt(getMoney) };
+        loginUser.transactions.debited.unshift(transaction);
+        transaction = { date: dateFormat(new Date().toLocaleDateString()), type: 'dedited', amount: currencyFormat(getMoney) };
         loginUser.balance -= parseInt(getMoney);
         database.collection('users').where('id', '==', loginUser.id).get().then(updateUser);
         addTransaction(transaction, '.Transaction-table');
@@ -94,18 +99,25 @@ function debitMoney() {
 function fillTransactionTable() {
     var table = document.querySelector('.Transaction-table');
     var transactions = loginUser.transactions;
-    for (transaction of transactions) {
+    for (transaction of transactions.credited) {
         var tr = document.createElement('tr');
         tr.appendChild(createTdata(transaction.date));
-        tr.appendChild(createTdata(transaction.type));
-        tr.appendChild(createTdata(transaction.amount));
+        tr.appendChild(createTdata("credited"));
+        tr.appendChild(createTdata(currencyFormat(transaction.amount)));
+        table.appendChild(tr);
+    }
+    for (transaction of transactions.debited) {
+        var tr = document.createElement('tr');
+        tr.appendChild(createTdata(transaction.date));
+        tr.appendChild(createTdata("dedited"));
+        tr.appendChild(createTdata(currencyFormat(transaction.amount)));
         table.appendChild(tr);
     }
 }
 
 /**
  * This function will get entered amount from .amount and if it is less than 5,000 then it displays error message in webpage
- * checked variable will get checked radio button and then creating deposite object having valueDate , type, plantype and currency format
+ * checked variable will get checked radio button and then creating deposite object having date , type, plantype and currency format
  * and we are adding the object to user's fixedDeposites list then we are changing the localStorage
  */
 function addAmount() {
@@ -116,12 +128,13 @@ function addAmount() {
     } else if (!(/^\d{0,15}$/.test(getAmount))) {
         document.querySelector('.errorMsg-3').innerHTML = 'Please Enter Valid Amount';
     } else if (parseInt(getAmount) < 5000) {
-        document.querySelector('.errorMsg-3').innerHTML = 'Minimum amount is ₹ 5,000';
+        document.querySelector('.errorMsg-3').innerHTML = 'Minimum Amount is ₹ 5,000';
     } else {
         var checked = document.querySelector('input[type=radio]:checked');
         var plantype = (checked.value == 1) ? '1 Year' : '5 Years';
-        var deposite = { valueDate: new Date().toLocaleDateString(), type: plantype, amount: currencyFormat(getAmount) };
+        var deposite = { date: dateFormat(new Date().toLocaleDateString()), type: plantype, amount: parseInt(getAmount) };
         loginUser.fixedDeposites.unshift(deposite);
+        deposite.amount = getAmount;
         database.collection('users').where('id', '==', loginUser.id).get().then(updateUser);
         addTransaction(deposite, '.FixedDeposite-table');
     }
@@ -135,9 +148,9 @@ function fillFixedDepositePlans() {
     var deposites = loginUser.fixedDeposites;
     for (deposite of deposites) {
         var tr = document.createElement('tr');
-        tr.appendChild(createTdata(deposite.valueDate));
+        tr.appendChild(createTdata(deposite.date));
         tr.appendChild(createTdata(deposite.type));
-        tr.appendChild(createTdata(deposite.amount));
+        tr.appendChild(createTdata(currencyFormat(deposite.amount)));
         tr.appendChild(calculateEstimatedAmount(deposite));
         tr.appendChild(calculateMaturityDate(deposite));
         table.appendChild(tr);
@@ -186,7 +199,7 @@ function switchtoDeposits() {
  * this afunction will remove the customer-d in sessionStorage and redirect to login page
  */
 function logout() {
-    database.collection('users').doc('loginuser').delete().then(function() {
+    database.collection('users').doc('loginId').delete().then(function() {
         location.assign('../Login.html');
     });
 }
@@ -218,7 +231,7 @@ document.querySelector('.far').onclick = function() {
 
 //This will redirect to change password page
 document.getElementById('Change').onclick = function(event) {
-    document.getElementById('Change').href = '../Changepassword.html?user';
+    document.getElementById('Change').href = '../Changepassword.html?Id';
     console.log(document.getElementById('Change'));
     document.getElementById('Change').click();
 }

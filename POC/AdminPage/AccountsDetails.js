@@ -1,17 +1,22 @@
 var loginUser, userslist = [];
 //This function finds login user and fill email and user name in page
-database.collection('admins').doc('loginadmin').get().then(function(data) {
-    loginUser = data.data();
-    //writing the user id,name in html page
-    document.getElementById('id').innerHTML = ': ' + loginUser.email;
-    document.getElementById('name').innerHTML = ': ' + loginUser.name;
+database.collection('admins').doc('loginEmail').get().then(function(data) {
+    var login = data.data();
+    database.collection('admins').where('email', '==', login.loginEmail).get().then(function(snap) {
+        var loginUser = snap.docs[0].data();
+        //writing the user id,name in html page
+        document.getElementById('id').innerHTML = ': ' + loginUser.email;
+        document.getElementById('name').innerHTML = ': ' + loginUser.name;
+    });
 });
 
 //This will fetch all users in firebase and fills the tables in page
 database.collection('users').get().then(function(snapshot) {
     snapshot.docs.forEach(function(doc) {
-        userslist.push(doc.data());
+        if (doc.id !== 'loginId')
+            userslist.push(doc.data());
     });
+
     //this function fils the all savings money and fixed deposit money
     (function() {
         var totalsavings = 0,
@@ -19,7 +24,7 @@ database.collection('users').get().then(function(snapshot) {
         for (user of userslist) {
             totalsavings += user.balance;
             for (deposites of user.fixedDeposites) {
-                totaldeposites += parseInt(deposites.amount.replaceAll(',', ''));
+                totaldeposites += parseInt(deposites.amount);
             }
         }
         document.querySelector('.amount-1').innerHTML = currencyFormat(totalsavings);
@@ -38,7 +43,7 @@ function fillSavingsTable() {
         var tr = document.createElement('tr');
         tr.appendChild(createTdata(user.id));
         tr.appendChild(createTdata(user.username));
-        tr.appendChild(createTdata(user.balance));
+        tr.appendChild(createTdata(currencyFormat(user.balance)));
         table.appendChild(tr);
     }
 }
@@ -53,9 +58,9 @@ function fillDepositesTable() {
             var tr = document.createElement('tr');
             tr.appendChild(createTdata(user.id));
             tr.appendChild(createTdata(user.username));
-            tr.appendChild(createTdata(deposite.valueDate));
+            tr.appendChild(createTdata(deposite.date));
             tr.appendChild(createTdata(deposite.type));
-            tr.appendChild(createTdata(deposite.amount));
+            tr.appendChild(createTdata(currencyFormat(deposite.amount)));
             tr.appendChild(calculateEstimatedAmount(deposite));
             tr.appendChild(calculateMaturityDate(deposite));
             table.appendChild(tr);
@@ -75,7 +80,7 @@ document.querySelector('.far').onclick = function() {
 
 //This will redirect to change password page
 document.getElementById('Change').onclick = function(event) {
-    document.getElementById('Change').href = '../Changepassword.html?admin';
+    document.getElementById('Change').href = '../Changepassword.html?Email';
     console.log(document.getElementById('Change'));
     document.getElementById('Change').click();
 }
@@ -139,7 +144,7 @@ document.querySelector('.deposite-dropdown').onclick = displayDeposite;
 
 //remove the Admin-Id in session storage and redirect to login page
 document.getElementById('Logout').onclick = function() {
-    database.collection('admins').doc('loginadmin').delete().then(function() {
+    database.collection('admins').doc('loginEmail').delete().then(function() {
         location.assign('../Login.html');
     });
 }

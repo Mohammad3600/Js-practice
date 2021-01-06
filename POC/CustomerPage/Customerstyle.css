@@ -38,27 +38,35 @@ input {
     border-radius: 5px;
     height: 2rem;
     font-size: 1rem;
-    font-family: 'Times New Roman', Times, serif;
     margin: 2rem 1rem 0rem;
 }
 
 input[type='button'] {
-    width: 6rem;
-    height: 2.2rem;
+    width: 6.4rem;
+    height: 2.4rem;
     border: none;
     margin: 10px auto 0px;
     color: rgb(255, 255, 255);
-    background-color: rgb(23, 127, 175);
+    background-color: rgb(0, 174, 255);
 }
 
 input[type='button']:hover {
-    background-color: rgb(7, 161, 233);
+    background-color: rgb(62, 194, 255);
 }
 
 [class^='errorMsg-'] {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     margin-left: 1rem;
     color: rgb(255, 30, 30);
+}
+
+.errorMsg-1 {
+    margin-bottom: 3rem;
+}
+
+.deposite-container .addAmount {
+    margin-bottom: 2rem;
+    margin-left: 12px;
 }
 
 input[type='radio'] {

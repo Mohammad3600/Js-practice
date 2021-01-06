@@ -11,7 +11,7 @@ function currencyFormat(money) {
  * @param {object} deposite user's deposite detail
  */
 function calculateMaturityDate(deposite) {
-    var date = deposite.valueDate;
+    var date = deposite.date;
     var plan = (deposite.type == '1 Year') ? 1 : 5;
     var maturitydate = date.slice(0, date.length - 4) + (parseInt(date.slice(date.length - 4)) + plan)
     var td = document.createElement('td');
@@ -25,7 +25,7 @@ function calculateMaturityDate(deposite) {
  * @param {Array} deposite user's deposite details
  */
 function calculateEstimatedAmount(deposite) {
-    var estimation = parseInt(deposite['amount'].replaceAll(',', ''));
+    var estimation = parseInt(deposite.amount);
     var interest = (deposite['type'] == '1 Year') ? 6 : 5 * 6.5;
     estimation = estimation + estimation * interest / 100;
     var td = document.createElement('td');
@@ -43,4 +43,12 @@ function createTdata(value) {
     var textValue = document.createTextNode(value);
     td.appendChild(textValue);
     return td;
+}
+
+/**
+ * It convert date / into -
+ * @param {string} date 
+ */
+function dateFormat(date) {
+    return date.replaceAll('/', '-');
 }
