@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/84c7f42d8e.js"></script>
+    <title>Customer Page</title>
+<link href="/dist/vendors-node_modules_firebase_app_dist_index_esm_js-node_modules_firebase_firestore_dist_inde-8a6c07.css" rel="stylesheet"><link href="/dist/customer.css" rel="stylesheet"></head>
+
+<body>
+    <header class="position-sticky top-0">
+        <nav class="navbar navbar-light  bg-violet shadow-sm text-white">
+            <a class="navbar-brand ms-1 text-white" href="index.html">
+                <i class="fas fa-money-check-alt fs-2"></i>
+                <span class="fs-2">ACS BANK</span>
+            </a>
+            <ul class="navbar-nav profile position-absolute top-75 end-0 bg-light shadow d-none">
+                <li class="nav-item me-1 pointer hover-color">
+                    <button class="btn" id="Change"><i class="fas fa-user-lock"></i> Change Password</button>
+                </li>
+                <li class="nav-item me-1 pointer hover-color">
+                    <button class="btn" id="Logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </li>
+            </ul>
+            <div>
+                <label id="username" class="align-top me-2 mt-1"></label>
+                <i class="far fa-user-circle fs-2 me-4 pointer" title="Profile"></i>
+            </div>
+        </nav>
+    </header>
+    <div class="box fw-bold">
+        <div class="row m-0">
+            <div class="col col-xl-3">
+                <label>Name</label>
+            </div>
+            <div class="col col-xl-3">
+                <label id="name"></label>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col col-xl-3">
+                <label>Customer-id</label>
+            </div>
+            <div class="col col-xl-3">
+                <label id="id"></label>
+            </div>
+        </div>
+    </div>
+    <ul class="nav nav-tabs bg-violet text-white shadow-sm">
+        <li class="nav-item col-sm-2 col-md-3 col bg-select savings-dropdown pointer">
+            <div class="nav-link">Savings Account</div>
+        </li>
+        <li class="nav-item col-sm-2 col-md-3 col Deposite-dropdown pointer">
+            <div class="nav-link">Fixed Deposit</div>
+        </li>
+        <li class="nav-item col-sm-2 col-md-3 col transfer-dropdown pointer">
+            <div class="nav-link">Transfer Amount</div>
+        </li>
+    </ul>
+    <div class="box savings-container">
+        <div class="row m-0 justify-content-between">
+            <div class="col-sm-6 col-md-4 col-12">
+                <div class="d-flex my-2">
+                    <input type="text" id="money" class="form-control me-2" placeholder="Add Money to Savings Account">
+                    <button class="btn btn-primary  text-nowrap" id="add">Credit</button>
+                </div>
+                <div class="form-text text-danger mb-2 errorMsg-1"></div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-12">
+                <div class="d-flex my-2">
+                    <input type="text" id="money-debit" class="form-control me-2" placeholder="Debit Money from Savings Account">
+                    <button class="btn btn-primary text-nowrap" id="debit">Debit</button>
+                </div>
+                <div class="form-text text-danger mb-2 errorMsg-2"></div>
+            </div>
+        </div>
+        <div class="card my-3 shadow card-mw border-left-primary col-sm-4 col-md-3 col-10">
+            <div class="card-body text-primary d-flex justify-content-between">
+                <div>
+                    <label class="text-secondary">Total Balance</label>
+                    <h2 class="display-balance card-title"></h2>
+                </div>
+                <div class="align-self-center fs-1 text-black-50">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped Transaction-table">
+                <caption>Transactions-List</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="box d-none deposite-container">
+        <div class='fs-2'>Plans</div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="plan1" value="option1" checked>
+            <label class="form-check-label" for="plan1">1 Year (6% Interest)</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="plan2" value="option2">
+            <label class="form-check-label" for="plan2">5 Years (6.5% Interest)</label>
+        </div>
+        <div class="col-sm-6 col-md-4 col-12">
+            <input type="text" id="amount" class="form-control mt-3 mb-1" name="money" placeholder="Add Amount to Fixed Deposit">
+        </div>
+        <div class="form-text text-danger mb-2 errorMsg-3"></div>
+        <input type="button" class="btn btn-primary mb-1 addAmount" value="Add Plan">
+        <div class="table-responsive my-4">
+            <table class="table table-striped FixedDeposite-table">
+                <caption>Fixed-Deposit Plans</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Estimated Amount</th>
+                        <th scope="col">Maturity Date</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="box d-none transfer-container min-height-2">
+        <div class="d-none alert alert-success" role="alert">Payment successful <i class="fa fa-check-circle text-success" aria-hidden="true"></i></div>
+        <div class="form-floating col-sm-4 col">
+            <input type="text" class="form-control" id="customer-id" placeholder="Enter Customer-id">
+            <label for="customer-id">Customer-Id</label>
+        </div>
+        <div id="error-1" class="form-text text-danger mb-2"></div>
+        <div class="form-floating col-sm-4 col">
+            <input type=" text " class="form-control" id="cash" placeholder="Enter Amount">
+            <label for="cash">Amount</label>
+        </div>
+        <div id="error-2" class="form-text text-danger mb-2"></div>
+        <input type="button" class="btn btn-primary" id="send" value="Send">
+    </div>
+    <footer class="p-3 bg-violet text-white text-center">
+        <small> ©2020 American Cybersystems, Inc. All Rights Reserved</small>
+    </footer>
+<script src="/dist/vendors-node_modules_firebase_app_dist_index_esm_js-node_modules_firebase_firestore_dist_inde-8a6c07.bundle.js"></script><script src="/dist/customer.bundle.js"></script><script src="/dist/runtime.bundle.js"></script><script src="/dist/shared.bundle.js"></script></body>
+
+</html>

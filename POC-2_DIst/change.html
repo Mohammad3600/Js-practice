@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/84c7f42d8e.js"></script>
+    <title>Change password</title>
+<link href="/dist/vendors-node_modules_firebase_app_dist_index_esm_js-node_modules_firebase_firestore_dist_inde-8a6c07.css" rel="stylesheet"><link href="/dist/change.css" rel="stylesheet"></head>
+
+<body>
+    <header class="position-sticky top-0">
+        <nav class="navbar navbar-light bg-violet">
+            <a class="navbar-brand text-white ms-1" href="#">
+                <i class="fas fa-money-check-alt fs-2"></i>
+                <span class="fs-2">ACS BANK</span>
+            </a>
+            <label class='text-white pe-2 name'></label>
+        </nav>
+    </header>
+    <form class="box Login-container mt-3" name="UserForm">
+        <div class="text-center">
+            <h1 class="text-primary mb-4">Change Password</h1>
+        </div>
+        <div class="col-sm-6 col-xl-4 col-9 mb-3 mx-auto">
+            <label for="Old" class='form-label'>Current Password<span class="text-danger">*</span></label>
+            <input type="password" id='Old' class="form-control">
+            <div id='OldError' class="form-text text-danger"></div>
+        </div>
+        <div class="col-sm-6 col-xl-4 col-9 mb-3 mx-auto">
+            <label for="New" class='form-label'>New Password<span class="text-danger">*</span></label>
+            <input type="password" id='New' class="form-control">
+            <div id='NewError' class="form-text text-danger"></div>
+        </div>
+        <div class="col-sm-6 col-xl-4 col-9 mb-3 mx-auto">
+            <label for="Confirm" class='form-label'>Confirm Password<span class="text-danger">*</span></label>
+            <input type="password" id='Confirm' class="form-control">
+            <div id='ConfirmError' class="form-text text-danger"></div>
+        </div>
+        <div class="col-sm-6 col-xl-4 col-9 mx-auto">
+            <button type="submit" class="btn btn-primary">Change</button>
+        </div>
+    </form>
+    <div class="box success-container d-none alert alert-success text-center" role="alert">
+        <div class='fs-2'>
+            Password Changed Successfully<i class="fa fa-check-circle text-success ms-1" aria-hidden="true"></i>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary mt-3" id="Back">Back</button>
+        </div>
+    </div>
+<script src="/dist/runtime.bundle.js"></script><script src="/dist/vendors-node_modules_firebase_app_dist_index_esm_js-node_modules_firebase_firestore_dist_inde-8a6c07.bundle.js"></script><script src="/dist/vendors-node_modules_crypto-js_index_js.bundle.js"></script><script src="/dist/change.bundle.js"></script></body>
+
+</html>

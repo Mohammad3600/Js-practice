@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/84c7f42d8e.js"></script>
+    <title>Admin Page</title>
+<link href="/dist/vendors-node_modules_firebase_app_dist_index_esm_js-node_modules_firebase_firestore_dist_inde-8a6c07.css" rel="stylesheet"><link href="/dist/admin.css" rel="stylesheet"></head>
+
+<body>
+    <header class="position-sticky top-0">
+        <nav class="navbar navbar-light  bg-violet shadow-sm text-white">
+            <a class="navbar-brand ms-1 text-white" href="index.html">
+                <i class="fas fa-money-check-alt fs-2"></i>
+                <span class="fs-2">ACS BANK</span>
+            </a>
+            <ul class="navbar-nav profile position-absolute top-75 end-0 bg-light shadow d-none">
+                <li class="nav-item me-1 pointer hover-color">
+                    <button class="btn" id="Change"><i class="fas fa-user-lock"></i> Change Password</button>
+                </li>
+                <li class="nav-item me-1 pointer hover-color">
+                    <button class="btn" id="Logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </li>
+            </ul>
+            <div>
+                <label id="username" class="align-top me-2 mt-1"></label>
+                <i class="far fa-user-circle fs-2 me-4 pointer" title="Profile"></i>
+            </div>
+        </nav>
+    </header>
+    <div class="box fw-bold">
+        <div class="row m-0">
+            <div class="col col-xl-3">
+                <label>Admin Name</label>
+            </div>
+            <div class="col col-xl-3">
+                <label id="name"></label>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col col-xl-3">
+                <label>Admin Email</label>
+            </div>
+            <div class="col col-xl-3">
+                <label id="id"></label>
+            </div>
+        </div>
+    </div>
+    <ul class="nav nav-tabs bg-violet text-white shadow-sm">
+        <li class="nav-item col-sm-3 col bank-dropdown pointer bg-select">
+            <div class="nav-link">Bank Money Details</div>
+        </li>
+        <li class="nav-item col-sm-3 col savings-dropdown pointer">
+            <div class="nav-link ">All Saving Accounts</div>
+        </li>
+        <li class="nav-item col-sm-3 col deposite-dropdown pointer">
+            <div class="nav-link">All Fixed Deposits</div>
+        </li>
+    </ul>
+    <div class="bank-container min-height my-5">
+        <div class="card my-3 shadow card-mw border-left-color-1 col-sm-6 col-md-4 col-10 mx-auto">
+            <div class="card-body text-primary d-flex justify-content-between">
+                <div>
+                    <label class="text-secondary">Total Saving Accounts Amount</label>
+                    <h2 class='amount-1 card-title'></h2>
+                </div>
+                <div class="align-self-center fs-1 text-black-50">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card my-3 shadow card-mw border-left-color-2 col-sm-6 col-md-4 col-10 mx-auto">
+            <div class="card-body text-primary d-flex justify-content-between">
+                <div>
+                    <label class="text-secondary">Total Fixed Deposits Amount</label>
+                    <h2 class='amount-2 card-title'></h2>
+                </div>
+                <div class="align-self-center fs-1 text-black-50">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="bank-container d-flex flex-column text-center my-5 min-height">
+        <label class="fs-4 my-1">Total Saving Accounts Amount</label>
+        <label class='amount-1 fs-1 mb-2'></label>
+        <label class="fs-4 my-1">Total Fixed Deposits Amount</label>
+        <label class='amount-2 fs-1 mb-2'></label>
+    </div> -->
+    <div class="box d-none savings-container min-height-2">
+        <div class="table-responsive">
+            <table class="table table-striped" id="savings-table">
+                <caption>Transactions-List</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="box d-none deposites-container">
+        <div class="table-responsive my-4">
+            <table class="table table-striped" id="deposites-table">
+                <caption>Fixed-Deposit Plans</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Plane Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Estimated Amount</th>
+                        <th scope="col">Maturity Date</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="p-3 bg-violet text-white text-center">
+        <small> ©2020 American Cybersystems, Inc. All Rights Reserved</small>
+    </footer>
+<script src="/dist/vendors-node_modules_firebase_app_dist_index_esm_js-node_modules_firebase_firestore_dist_inde-8a6c07.bundle.js"></script><script src="/dist/admin.bundle.js"></script><script src="/dist/runtime.bundle.js"></script><script src="/dist/shared.bundle.js"></script></body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/84c7f42d8e.js"></script>
+    <title>Bank Fund Mangaement System</title>
+<link href="/dist/vendors-node_modules_firebase_app_dist_index_esm_js-node_modules_firebase_firestore_dist_inde-8a6c07.css" rel="stylesheet"><link href="/dist/bank.css" rel="stylesheet"></head>
+
+<body>
+    <header class="position-sticky top-0 shadow">
+        <nav class="navbar navbar-light  bg-violet mb-5">
+            <a class="navbar-brand text-white ms-1" href="index.html">
+                <i class="fas fa-money-check-alt fs-2"></i>
+                <span class="fs-2">ACS BANK</span>
+            </a>
+            <ul class="navbar-nav flex-row">
+                <li class="nav-item me-1 text-white">
+                    <button id="Admin-btn" class="btn text-white">Admin</button>
+                </li>
+                <li class="nav-item me-1">
+                    <button id="Customer-btn" class="btn bg-select text-white">Customer</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <form name="UserForm">
+        <div>
+            <h1 class="text-primary mb-4 text-center">Sign in ACS Bank</h1>
+        </div>
+        <div class="col-sm-6 col-xl-4 col-9 mb-3 mx-auto">
+            <label for="userid" name="id" class="form-label">Customer ID</label>
+            <input type="text" class="form-control" id="userid">
+            <div id="idError" class="form-text text-danger"></div>
+        </div>
+        <div class="col-sm-6 col-xl-4 col-9 mb-3 mx-auto">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+            <div id="passwordError" class="form-text text-danger"></div>
+        </div>
+        <div class="col-sm-6 col-xl-4 col-9 mb-3 mx-auto">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
+    <!-- <script type="text/JavaScript" src="Firebase-Config.js"></script> -->
+    <!-- <script type="text/JavaScript" src="BankScript.js"></script> -->
+<script src="/dist/runtime.bundle.js"></script><script src="/dist/vendors-node_modules_firebase_app_dist_index_esm_js-node_modules_firebase_firestore_dist_inde-8a6c07.bundle.js"></script><script src="/dist/vendors-node_modules_crypto-js_index_js.bundle.js"></script><script src="/dist/bank.bundle.js"></script></body>
+
+</html>
